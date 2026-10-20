@@ -6,57 +6,24 @@
 <title>Física y Química</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/*
-  TOKENS
-  ─────────────────────────────────────────────
-  bg-deep:     #12101A   azul noche tinte lila
-  bg-mid:      #1A1726   sidebar / cards
-  bg-hover:    #221F30   hover
-
-  fucsia:      #F472B6   acento principal
-  fucsia-dim:  #FBCFE8   fucsia claro
-  lemon:       #FEF08A   amarillo limón (curso activo)
-  mint:        #A8E6C8   verde menta (detalles)
-  sky:         #BAE6FD   azul cielo (iconos pixel)
-
-  text-bright: #F5F0FF
-  text-mid:    #7C7A94
-  text-dim:    #2D2B3D
-  border:      #2A2538
-  ─────────────────────────────────────────────
-*/
-
 * { margin:0; padding:0; box-sizing:border-box; }
 
-body {
+html, body {
+  height: 100%;
+  width: 100%;
   background: #0C0A14;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2.5rem 1.5rem;
   font-family: 'Nunito', sans-serif;
+  color: #F5F0FF;
+  overflow: hidden;
 }
 
 .portal {
-  width: 100%;
-  max-width: 840px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid #2A2538;
-  box-shadow:
-    0 0 0 1px #1A1726,
-    0 32px 80px rgba(0,0,0,0.75),
-    0 0 60px rgba(244,114,182,0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: #12101A;
 }
-
-/* ══════════════════════════════════════════
-   PIXEL ART ICONS — SVG helpers
-   Paleta: sky #BAE6FD · mint #A8E6C8 · lemon #FEF08A · fucsia #F472B6
-══════════════════════════════════════════ */
-
-/* todos los SVG con shape-rendering crispEdges para pixel perfecto */
-svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 
 /* ══════════════════════════════════════════
    HEADER
@@ -64,16 +31,18 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 .header {
   background: #12101A;
   border-bottom: 2px solid #F472B6;
-  padding: 0.9rem 1.6rem;
+  padding: 0.75rem 1.6rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 0;
 }
+
+svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 
 .logo-text {
   font-family: 'Press Start 2P', monospace;
   font-size: 0.65rem;
-  color: #F5F0FF;
   line-height: 1.9;
   letter-spacing: 0.01em;
 }
@@ -86,7 +55,6 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  z-index: 1;
 }
 
 .lang-wrap {
@@ -98,17 +66,15 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 .lang-btn {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.58rem;
-  padding: 0.28rem 0.55rem;
+  padding: 0.28rem 0.6rem;
   background: transparent;
   color: #3D3B52;
   border: none;
   cursor: pointer;
+  transition: all 0.1s;
 }
-.lang-btn.active {
-  background: #F472B6;
-  color: #12101A;
-  font-weight: 600;
-}
+.lang-btn.active { background: #F472B6; color: #12101A; font-weight: 600; }
+.lang-btn:not(.active):hover { color: #7C7A94; }
 
 /* ══════════════════════════════════════════
    COURSE TABS
@@ -118,6 +84,8 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   border-bottom: 1px solid #2A2538;
   padding: 0 1.4rem;
   display: flex;
+  flex-shrink: 0;
+  overflow-x: auto;
 }
 
 .course-tab {
@@ -125,7 +93,7 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   font-size: 0.34rem;
   letter-spacing: 0.04em;
   color: #2D2B3D;
-  padding: 0.8rem 0.85rem;
+  padding: 0.8rem 0.9rem;
   cursor: pointer;
   border: none;
   border-bottom: 3px solid transparent;
@@ -135,27 +103,24 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   margin-bottom: -1px;
 }
 .course-tab:hover { color: #7C7A94; }
-.course-tab.active {
-  color: #FEF08A;
-  border-bottom-color: #FEF08A;
-}
+.course-tab.active { color: #FEF08A; border-bottom-color: #FEF08A; }
 
 /* ══════════════════════════════════════════
    BODY
 ══════════════════════════════════════════ */
 .body {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  min-height: 430px;
+  grid-template-columns: 210px 1fr;
+  flex: 1;
+  min-height: 0;
 }
 
 /* ── SIDEBAR ── */
 .sidebar {
   background: #12101A;
   border-right: 1px solid #2A2538;
-  padding: 1.2rem 0;
-  display: flex;
-  flex-direction: column;
+  padding: 1.1rem 0;
+  overflow-y: auto;
 }
 
 .sb-label {
@@ -163,7 +128,7 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   font-size: 0.3rem;
   letter-spacing: 0.1em;
   padding: 0 1.1rem;
-  margin: 1.1rem 0 0.5rem;
+  margin: 1.2rem 0 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -201,40 +166,18 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   transition: color 0.1s;
 }
 .sb-sub:hover { color: #4D4B64; }
-.sb-sub.active {
-  color: #FBCFE8;
-  border-left-color: rgba(244,114,182,0.35);
-}
+.sb-sub.active { color: #FBCFE8; border-left-color: rgba(244,114,182,0.4); }
 
-.sb-divider {
-  height: 1px;
-  background: #2A2538;
-  margin: 0.8rem 1.1rem;
-}
-
-/* icono pequeño en sidebar label */
-.sb-icon {
-  flex-shrink: 0;
-  opacity: 0.9;
-}
+.sb-divider { height:1px; background:#2A2538; margin:0.8rem 1.1rem; }
 
 /* ── CONTENT ── */
 .content {
   background: #1A1726;
-  padding: 1.8rem;
+  padding: 2rem;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-/* icono decorativo esquina content */
-.content-deco {
-  position: absolute;
-  bottom: 1rem;
-  right: 1.2rem;
-  opacity: 0.06;
+  gap: 1.4rem;
 }
 
 .content-eyebrow {
@@ -245,60 +188,69 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
   text-transform: uppercase;
   margin-bottom: 0.3rem;
 }
-
 .content-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #F5F0FF;
   letter-spacing: -0.02em;
-  line-height: 1.22;
+  line-height: 1.2;
   margin-bottom: 0.4rem;
 }
-
 .content-desc {
-  font-size: 0.77rem;
+  font-size: 0.78rem;
   color: #4D4B64;
   line-height: 1.65;
-  max-width: 380px;
+  max-width: 520px;
 }
 
-/* ── CARDS ── */
+/* empty state */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0.25;
+  text-align: center;
+}
+.empty-icon {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+.empty-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.38rem;
+  color: #7C7A94;
+  line-height: 2.2;
+  letter-spacing: 0.06em;
+}
+
+/* sim grid */
 .sim-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.75rem;
 }
 
 .sim-card {
   background: #12101A;
   border: 1px solid #2A2538;
   border-radius: 10px;
-  padding: 0.95rem 1rem 0.8rem;
+  padding: 1rem 1rem 0.85rem;
   cursor: pointer;
   transition: border-color 0.12s, transform 0.1s;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  position: relative;
-  overflow: hidden;
+  text-decoration: none;
 }
-.sim-card:hover {
-  border-color: #3D3B52;
-  transform: translateY(-1px);
-}
-.sim-card.featured {
-  border-color: #F472B6;
-  box-shadow: 0 0 0 1px rgba(244,114,182,0.1), 0 4px 20px rgba(244,114,182,0.07);
-}
-
-/* icono decorativo en esquina de card */
-.card-deco {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.6rem;
-  opacity: 0.12;
-}
-.sim-card.featured .card-deco { opacity: 0.18; }
+.sim-card:hover { border-color: #3D3B52; transform: translateY(-1px); }
+.sim-card.fisica  { border-left: 3px solid #F472B6; }
+.sim-card.quimica { border-left: 3px solid #A8E6C8; }
+.sim-card.fisica:hover  .sim-arrow { color: #F472B6; }
+.sim-card.quimica:hover .sim-arrow { color: #A8E6C8; }
 
 .sim-tag {
   font-family: 'JetBrains Mono', monospace;
@@ -316,30 +268,17 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 .sim-name {
   font-size: 0.84rem;
   font-weight: 700;
-  color: #4D4B64;
+  color: #F5F0FF;
   line-height: 1.3;
 }
-.sim-card.featured .sim-name { color: #F5F0FF; }
-
-.sim-meta {
-  font-size: 0.64rem;
-  color: #2D2B3D;
-}
-
-.sim-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.4rem;
-}
+.sim-meta { font-size: 0.64rem; color: #2D2B3D; }
+.sim-footer { display:flex; justify-content:flex-end; margin-top:0.4rem; }
 .sim-arrow {
   font-family: 'Press Start 2P', monospace;
   font-size: 0.4rem;
   color: #2D2B3D;
   transition: color 0.12s;
 }
-.sim-card:hover .sim-arrow    { color: #7C7A94; }
-.sim-card.featured .sim-arrow { color: #F472B6; }
-.feat-q .sim-arrow            { color: #A8E6C8; }
 
 /* ══════════════════════════════════════════
    FOOTER
@@ -347,26 +286,22 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 .footer {
   background: #12101A;
   border-top: 1px solid #2A2538;
-  padding: 0.58rem 1.6rem;
+  padding: 0.5rem 1.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 .footer-sig {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.52rem;
+  font-size: 0.5rem;
   color: #2D2B3D;
   letter-spacing: 0.04em;
 }
 .footer-sig span { color: #3D3B52; }
-.footer-cc {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.5rem;
-  color: #2D2B3D;
-}
-.footer-cc a { color: #3D3B52; text-decoration: none; }
-.footer-cc a:hover { color: #F472B6; }
-
+.footer-cc { font-family:'JetBrains Mono',monospace; font-size:0.48rem; color:#2D2B3D; }
+.footer-cc a { color:#3D3B52; text-decoration:none; }
+.footer-cc a:hover { color:#F472B6; }
 </style>
 </head>
 <body>
@@ -374,165 +309,302 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; }
 
   <!-- HEADER -->
   <div class="header">
-
-    <!-- átomo pixel pequeño como logo -->
+    <!-- átomo pixel logo -->
     <svg width="28" height="28" viewBox="0 0 7 7" xmlns="http://www.w3.org/2000/svg">
-      <!-- órbita elipse 1 -->
       <rect x="0" y="3" width="2" height="1" fill="#BAE6FD"/>
       <rect x="5" y="3" width="2" height="1" fill="#BAE6FD"/>
       <rect x="1" y="1" width="1" height="1" fill="#BAE6FD"/>
       <rect x="5" y="1" width="1" height="1" fill="#BAE6FD"/>
       <rect x="1" y="5" width="1" height="1" fill="#BAE6FD"/>
       <rect x="5" y="5" width="1" height="1" fill="#BAE6FD"/>
-      <!-- órbita elipse 2 (diagonal) -->
       <rect x="3" y="0" width="1" height="2" fill="#F472B6"/>
       <rect x="3" y="5" width="1" height="2" fill="#F472B6"/>
-      <!-- núcleo -->
       <rect x="2" y="2" width="3" height="3" fill="#A8E6C8"/>
       <rect x="3" y="2" width="1" height="1" fill="#C8F8E8"/>
-      <!-- electrones -->
       <rect x="0" y="3" width="1" height="1" fill="#FEF08A"/>
       <rect x="6" y="3" width="1" height="1" fill="#FEF08A"/>
       <rect x="3" y="0" width="1" height="1" fill="#FEF08A"/>
     </svg>
-
     <div class="logo-text">
-      <span class="logo-f">Física</span>
+      <span class="logo-f" id="lbl-fisica">Física</span>
       <span class="logo-amp"> &amp; </span>
-      <span class="logo-q">Química</span>
+      <span class="logo-q" id="lbl-quimica">Química</span>
     </div>
-
     <div class="header-right">
       <div class="lang-wrap">
-        <button class="lang-btn active">ES</button>
-        <button class="lang-btn">EN</button>
+        <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
+        <button class="lang-btn" onclick="setLang('en',this)">EN</button>
       </div>
     </div>
   </div>
 
   <!-- COURSE TABS -->
-  <div class="courses">
-    <button class="course-tab">2º ESO</button>
-    <button class="course-tab">3º ESO</button>
-    <button class="course-tab active">4º ESO</button>
-    <button class="course-tab">1º BACH</button>
-    <button class="course-tab">2º BACH</button>
-  </div>
+  <div class="courses" id="course-tabs"></div>
 
   <!-- BODY -->
   <div class="body">
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-
-      <div class="sb-label label-f">
-        <!-- rayo clásico: ancho arriba, punta abajo --> 
-        <svg class="sb-icon" width="11" height="18" viewBox="0 0 6 9" xmlns="http://www.w3.org/2000/svg">
-          <!-- parte superior ancha --> 
-          <rect x="2" y="0" width="4" height="1" fill="#FBBF24"/>
-          <rect x="1" y="1" width="4" height="1" fill="#FBBF24"/>
-          <rect x="0" y="2" width="4" height="1" fill="#FBBF24"/>
-          <rect x="0" y="3" width="6" height="1" fill="#FBBF24"/>
-          <!-- vértice / codo --> 
-          <rect x="2" y="4" width="3" height="1" fill="#FBBF24"/>
-          <!-- parte inferior estrechando hacia punta --> 
-          <rect x="2" y="5" width="2" height="1" fill="#FBBF24"/>
-          <rect x="1" y="6" width="2" height="1" fill="#FBBF24"/>
-          <rect x="1" y="7" width="1" height="1" fill="#FBBF24"/>
-          <rect x="0" y="8" width="1" height="1" fill="#FBBF24"/>
-        </svg>
-        Física
-      </div>
-      <div class="sb-item">Cinemática</div>
-      <div class="sb-item active">Dinámica</div>
-      <div class="sb-sub active">Fuerzas y leyes</div>
-      <div class="sb-sub">Plano inclinado</div>
-      <div class="sb-sub">Rozamiento</div>
-      <div class="sb-item">Energía</div>
-      <div class="sb-item">Ondas y sonido</div>
-      <div class="sb-item">Electricidad</div>
-
-      <div class="sb-divider"></div>
-
-      <div class="sb-label label-q">
-        <!-- matraz erlenmeyer pixel -->
-        <svg class="sb-icon" width="14" height="14" viewBox="0 0 7 7" xmlns="http://www.w3.org/2000/svg">
-          <!-- cuello -->
-          <rect x="2" y="0" width="3" height="1" fill="#A8E6C8"/>
-          <rect x="2" y="1" width="3" height="1" fill="#A8E6C8"/>
-          <!-- hombros -->
-          <rect x="1" y="2" width="1" height="1" fill="#A8E6C8"/>
-          <rect x="5" y="2" width="1" height="1" fill="#A8E6C8"/>
-          <rect x="2" y="2" width="3" height="1" fill="#A8E6C8"/>
-          <!-- cuerpo -->
-          <rect x="1" y="3" width="5" height="1" fill="#A8E6C8"/>
-          <rect x="0" y="4" width="7" height="1" fill="#A8E6C8"/>
-          <!-- líquido interior -->
-          <rect x="1" y="4" width="5" height="1" fill="#10B981"/>
-          <rect x="2" y="3" width="1" height="1" fill="#C8F8E8"/>
-          <!-- base -->
-          <rect x="0" y="5" width="7" height="1" fill="#A8E6C8"/>
-          <rect x="1" y="6" width="5" height="1" fill="#059669"/>
-        </svg>
-        Química
-      </div>
-      <div class="sb-item">Tabla periódica</div>
-      <div class="sb-item">Enlace químico</div>
-      <div class="sb-item">Reacciones</div>
-
-    </div>
-
-    <!-- CONTENT -->
-    <div class="content">
-
-      <div>
-        <div class="content-eyebrow">4º ESO · Dinámica</div>
-        <div class="content-title">Fuerzas y leyes<br>de Newton</div>
-        <div class="content-desc">Explora las leyes del movimiento con simulaciones interactivas. Ajusta parámetros y observa qué ocurre en tiempo real.</div>
-      </div>
-
-      <div class="sim-grid">
-
-        <div class="sim-card featured">
-          <span class="sim-tag tag-f">Física</span>
-          <div class="sim-name">Plano inclinado</div>
-          <div class="sim-meta">Rozamiento · 2.ª ley de Newton</div>
-          <div class="sim-footer"><span class="sim-arrow">▶</span></div>
-        </div>
-
-        <div class="sim-card">
-          <span class="sim-tag tag-f">Física</span>
-          <div class="sim-name">Diagrama de fuerzas</div>
-          <div class="sim-meta">Equilibrio · Vectores</div>
-          <div class="sim-footer"><span class="sim-arrow">▶</span></div>
-        </div>
-
-        <div class="sim-card">
-          <span class="sim-tag tag-f">Física</span>
-          <div class="sim-name">Poleas y máquinas</div>
-          <div class="sim-meta">Ventaja mecánica · Trabajo</div>
-          <div class="sim-footer"><span class="sim-arrow">▶</span></div>
-        </div>
-
-        <div class="sim-card feat-q" style="border-color:#A8E6C8; box-shadow: 0 0 0 1px rgba(168,230,200,0.1);">
-          <span class="sim-tag tag-q">Química</span>
-          <div class="sim-name">Ajuste de ecuaciones</div>
-          <div class="sim-meta">Estequiometría · Conservación</div>
-          <div class="sim-footer"><span class="sim-arrow" style="color:#A8E6C8">▶</span></div>
-        </div>
-
-      </div>
-    </div>
+    <div class="sidebar" id="sidebar"></div>
+    <div class="content" id="content"></div>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-sig">© <span>Sara G.M.</span> · Física y Química</div>
-    <div class="footer-cc">
-      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
-    </div>
+    <div class="footer-sig">© <span>Sara G.M.</span> · <span id="lbl-footer">Física y Química</span></div>
+    <div class="footer-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></div>
   </div>
 
 </div>
+<script>
+/* ══════════════════════════════════════════
+   DATOS
+   Para añadir una simulación:
+   simulations: [
+     { name: "Nombre", meta: "Subtítulo", file: "ruta/sim.html" }
+   ]
+══════════════════════════════════════════ */
+const COURSES = {
+  '2eso': {
+    es: '2º ESO', en: 'Year 8',
+    blocks: {
+      materia:    { es:'La materia',       en:'Matter',            q:false, subs:[], simulations:[] },
+      fuerzas:    { es:'Fuerzas',          en:'Forces',            q:false, subs:[], simulations:[] },
+      energia:    { es:'Energía',          en:'Energy',            q:false, subs:[], simulations:[] },
+      mezclas:    { es:'Mezclas y sustancias', en:'Mixtures',      q:true,  subs:[], simulations:[] },
+    }
+  },
+  '3eso': {
+    es: '3º ESO', en: 'Year 9',
+    blocks: {
+      cinematica: { es:'Cinemática',       en:'Kinematics',        q:false, subs:[], simulations:[] },
+      fuerzas:    { es:'Fuerzas',          en:'Forces',            q:false, subs:[], simulations:[] },
+      energia:    { es:'Energía',          en:'Energy',            q:false, subs:[], simulations:[] },
+      atomo:      { es:'Estructura atómica', en:'Atomic structure',q:true,  subs:[], simulations:[] },
+      reacciones: { es:'Reacciones químicas','en':'Chemical reactions', q:true, subs:[], simulations:[] },
+    }
+  },
+  '4eso': {
+    es: '4º ESO', en: 'Year 10',
+    blocks: {
+      cinematica:     { es:'Cinemática',     en:'Kinematics',       q:false, subs:[], simulations:[] },
+      dinamica:       { es:'Dinámica',       en:'Dynamics',         q:false,
+                        subs:['Fuerzas y leyes de Newton','Plano inclinado','Rozamiento'], simulations:[] },
+      energia:        { es:'Energía',        en:'Energy',           q:false, subs:[], simulations:[] },
+      ondas:          { es:'Ondas y sonido', en:'Waves & sound',    q:false, subs:[], simulations:[] },
+      electricidad:   { es:'Electricidad',   en:'Electricity',      q:false, subs:[], simulations:[] },
+      tablaperiodica: { es:'Tabla periódica','en':'Periodic table',  q:true,  subs:[], simulations:[] },
+      enlace:         { es:'Enlace químico', en:'Chemical bonding',  q:true,  subs:[], simulations:[] },
+      reacciones:     { es:'Reacciones',     en:'Reactions',         q:true,  subs:[], simulations:[] },
+    }
+  },
+  '1bach': {
+    es: '1º BACH', en: 'Year 11',
+    blocks: {
+      cinematica:     { es:'Cinemática',      en:'Kinematics',      q:false, subs:[], simulations:[] },
+      dinamica:       { es:'Dinámica',        en:'Dynamics',        q:false, subs:[], simulations:[] },
+      gravitacion:    { es:'Gravitación',     en:'Gravitation',     q:false, subs:[], simulations:[] },
+      termodinamica:  { es:'Termodinámica',   en:'Thermodynamics',  q:true,  subs:[], simulations:[] },
+      cineticaquim:   { es:'Cinética química','en':'Chemical kinetics', q:true, subs:[], simulations:[] },
+    }
+  },
+  '2bach': {
+    es: '2º BACH', en: 'Year 12',
+    blocks: {
+      gravitacion:      { es:'Gravitación',       en:'Gravitation',      q:false, subs:[], simulations:[] },
+      electromagnetismo:{ es:'Electromagnetismo', en:'Electromagnetism', q:false, subs:[], simulations:[] },
+      ondas:            { es:'Ondas',             en:'Waves',            q:false, subs:[], simulations:[] },
+      optica:           { es:'Óptica',            en:'Optics',           q:false, subs:[], simulations:[] },
+      fisicamoderna:    { es:'Física moderna',    en:'Modern physics',   q:false, subs:[], simulations:[] },
+    }
+  }
+};
+
+const T = {
+  es: { fisica:'Física', quimica:'Química', footer:'Física y Química',
+        pickCourse:'Elige un curso', pickBlock:'Elige un bloque del menú',
+        empty:'Aún no hay simulaciones aquí.' },
+  en: { fisica:'Physics', quimica:'Chemistry', footer:'Physics & Chemistry',
+        pickCourse:'Select a course', pickBlock:'Select a topic from the menu',
+        empty:'No simulations here yet.' }
+};
+
+/* ── STATE ── */
+let lang = 'es';
+let activeCourse = null;
+let activeBlock  = null;
+
+/* ── LANG ── */
+function setLang(l, btn) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('lbl-fisica').textContent   = T[l].fisica;
+  document.getElementById('lbl-quimica').textContent  = T[l].quimica;
+  document.getElementById('lbl-footer').textContent   = T[l].footer;
+  activeCourse = null; activeBlock = null;
+  render();
+}
+
+/* ── SELECT ── */
+function selectCourse(id) { activeCourse = id; activeBlock = null; render(); }
+function selectBlock(id)  { activeBlock  = id; render(); }
+
+/* ── RENDER ── */
+function render() { renderTabs(); renderSidebar(); renderContent(); }
+
+function renderTabs() {
+  const el = document.getElementById('course-tabs');
+  el.innerHTML = '';
+  Object.entries(COURSES).forEach(([id, c]) => {
+    const b = document.createElement('button');
+    b.className = 'course-tab' + (activeCourse === id ? ' active' : '');
+    b.textContent = c[lang];
+    b.onclick = () => selectCourse(id);
+    el.appendChild(b);
+  });
+}
+
+function renderSidebar() {
+  const el = document.getElementById('sidebar');
+  el.innerHTML = '';
+  if (!activeCourse) return;
+
+  const blocks = COURSES[activeCourse].blocks;
+  const fisica  = Object.entries(blocks).filter(([,b]) => !b.q);
+  const quimica = Object.entries(blocks).filter(([,b]) =>  b.q);
+
+  if (fisica.length)  { el.appendChild(makeLabel('f')); fisica.forEach(([id,b])  => appendItem(el,id,b)); }
+  if (quimica.length) {
+    const div = document.createElement('div'); div.className='sb-divider'; el.appendChild(div);
+    el.appendChild(makeLabel('q')); quimica.forEach(([id,b]) => appendItem(el,id,b));
+  }
+}
+
+function makeLabel(type) {
+  const el = document.createElement('div');
+  el.className = 'sb-label ' + (type==='f' ? 'label-f' : 'label-q');
+  el.appendChild(type==='f' ? lightningIcon() : flaskIcon());
+  const s = document.createElement('span');
+  s.textContent = type==='f' ? T[lang].fisica : T[lang].quimica;
+  el.appendChild(s);
+  return el;
+}
+
+function appendItem(parent, id, block) {
+  const item = document.createElement('div');
+  item.className = 'sb-item' + (activeBlock===id ? ' active' : '');
+  item.textContent = block[lang];
+  item.onclick = () => selectBlock(id);
+  parent.appendChild(item);
+
+  if (activeBlock===id && block.subs && block.subs.length) {
+    block.subs.forEach(sub => {
+      const s = document.createElement('div');
+      s.className = 'sb-sub';
+      s.textContent = sub;
+      parent.appendChild(s);
+    });
+  }
+}
+
+function renderContent() {
+  const el = document.getElementById('content');
+  el.innerHTML = '';
+
+  if (!activeCourse) {
+    el.appendChild(emptyState('▶', T[lang].pickCourse)); return;
+  }
+  if (!activeBlock) {
+    const course = COURSES[activeCourse];
+    addEyebrow(el, course[lang]);
+    addTitle(el, course[lang]);
+    el.appendChild(emptyState('◀', T[lang].pickBlock)); return;
+  }
+
+  const course = COURSES[activeCourse];
+  const block  = course.blocks[activeBlock];
+  const isQ    = block.q;
+
+  addEyebrow(el, course[lang] + ' · ' + (isQ ? T[lang].quimica : T[lang].fisica));
+  addTitle(el, block[lang]);
+
+  const sims = block.simulations || [];
+  if (!sims.length) {
+    el.appendChild(emptyState('◉', T[lang].empty)); return;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'sim-grid';
+  sims.forEach(sim => {
+    const card = document.createElement('a');
+    card.className = 'sim-card ' + (isQ ? 'quimica' : 'fisica');
+    card.href = sim.file; card.target = '_blank';
+
+    const tag = document.createElement('span');
+    tag.className = 'sim-tag ' + (isQ ? 'tag-q' : 'tag-f');
+    tag.textContent = isQ ? T[lang].quimica : T[lang].fisica;
+    card.appendChild(tag);
+
+    const name = document.createElement('div');
+    name.className = 'sim-name'; name.textContent = sim.name; card.appendChild(name);
+
+    if (sim.meta) {
+      const m = document.createElement('div');
+      m.className = 'sim-meta'; m.textContent = sim.meta; card.appendChild(m);
+    }
+    const f = document.createElement('div'); f.className='sim-footer';
+    const a = document.createElement('span'); a.className='sim-arrow'; a.textContent='▶';
+    f.appendChild(a); card.appendChild(f);
+    grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+
+function addEyebrow(parent, text) {
+  const e = document.createElement('div'); e.className='content-eyebrow'; e.textContent=text; parent.appendChild(e);
+}
+function addTitle(parent, text) {
+  const e = document.createElement('div'); e.className='content-title'; e.textContent=text; parent.appendChild(e);
+}
+function emptyState(icon, text) {
+  const w = document.createElement('div'); w.className='empty-state';
+  const i = document.createElement('div'); i.className='empty-icon'; i.textContent=icon;
+  const t = document.createElement('div'); t.className='empty-text'; t.textContent=text;
+  w.appendChild(i); w.appendChild(t); return w;
+}
+
+/* ── PIXEL ICONS ── */
+function lightningIcon() {
+  const ns = 'http://www.w3.org/2000/svg';
+  const s = document.createElementNS(ns,'svg');
+  s.setAttribute('width','11'); s.setAttribute('height','18'); s.setAttribute('viewBox','0 0 6 9');
+  [[2,0,4],[1,1,4],[0,2,4],[0,3,6],[2,4,3],[2,5,2],[1,6,2],[1,7,1],[0,8,1]].forEach(([x,y,w]) => {
+    const r = document.createElementNS(ns,'rect');
+    r.setAttribute('x',x); r.setAttribute('y',y); r.setAttribute('width',w); r.setAttribute('height',1); r.setAttribute('fill','#FBBF24');
+    s.appendChild(r);
+  });
+  return s;
+}
+
+function flaskIcon() {
+  const ns = 'http://www.w3.org/2000/svg';
+  const s = document.createElementNS(ns,'svg');
+  s.setAttribute('width','14'); s.setAttribute('height','14'); s.setAttribute('viewBox','0 0 7 7');
+  [
+    [2,0,3,1,'#A8E6C8'],[2,1,3,1,'#A8E6C8'],
+    [1,2,1,1,'#A8E6C8'],[5,2,1,1,'#A8E6C8'],[2,2,3,1,'#A8E6C8'],
+    [1,3,5,1,'#A8E6C8'],[0,4,7,1,'#A8E6C8'],
+    [1,4,5,1,'#10B981'],[2,3,1,1,'#C8F8E8'],
+    [0,5,7,1,'#A8E6C8'],[1,6,5,1,'#059669']
+  ].forEach(([x,y,w,h,c]) => {
+    const r = document.createElementNS(ns,'rect');
+    r.setAttribute('x',x); r.setAttribute('y',y); r.setAttribute('width',w); r.setAttribute('height',h); r.setAttribute('fill',c);
+    s.appendChild(r);
+  });
+  return s;
+}
+
+/* ── INIT ── */
+render();
+</script>
 </body>
 </html>
