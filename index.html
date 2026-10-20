@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Física y Química</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/*
+  TOKENS
+  ─────────────────────────────────────────────
+  bg-deep:     #12101A   azul noche tinte lila
+  bg-mid:      #1A1726   sidebar / cards
+  bg-hover:    #221F30   hover
+
+  fucsia:      #F472B6   acento principal
+  fucsia-dim:  #FBCFE8   fucsia claro
+  lemon:       #FEF08A   amarillo limón (curso activo)
+  mint:        #A8E6C8   verde menta (detalles)
+  sky:         #BAE6FD   azul cielo (iconos pixel)
+
+  text-bright: #F5F0FF
+  text-mid:    #7C7A94
+  text-dim:    #2D2B3D
+  border:      #2A2538
+  ─────────────────────────────────────────────
+*/
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #0C0A14;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.portal {
+  width: 100%;
+  max-width: 840px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #2A2538;
+  box-shadow:
+    0 0 0 1px #1A1726,
+    0 32px 80px rgba(0,0,0,0.75),
+    0 0 60px rgba(244,114,182,0.05);
+}
+
+/* ══════════════════════════════════════════
+   PIXEL ART ICONS — SVG helpers
+   Paleta: sky #BAE6FD · mint #A8E6C8 · lemon #FEF08A · fucsia #F472B6
+══════════════════════════════════════════ */
+
+/* todos los SVG con shape-rendering crispEdges para pixel perfecto */
+svg { image-rendering: pixelated; shape-rendering: crispEdges; }
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+.header {
+  background: #12101A;
+  border-bottom: 2px solid #F472B6;
+  padding: 0.9rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  color: #F5F0FF;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+.logo-f   { color: #FBCFE8; }
+.logo-amp { color: #F472B6; font-size: 0.5rem; }
+.logo-q   { color: #FEF08A; }
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  z-index: 1;
+}
+
+.lang-wrap {
+  display: flex;
+  border: 1px solid #2A2538;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.lang-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  padding: 0.28rem 0.55rem;
+  background: transparent;
+  color: #3D3B52;
+  border: none;
+  cursor: pointer;
+}
+.lang-btn.active {
+  background: #F472B6;
+  color: #12101A;
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   COURSE TABS
+══════════════════════════════════════════ */
+.courses {
+  background: #1A1726;
+  border-bottom: 1px solid #2A2538;
+  padding: 0 1.4rem;
+  display: flex;
+}
+
+.course-tab {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.34rem;
+  letter-spacing: 0.04em;
+  color: #2D2B3D;
+  padding: 0.8rem 0.85rem;
+  cursor: pointer;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  white-space: nowrap;
+  transition: color 0.12s, border-color 0.12s;
+  margin-bottom: -1px;
+}
+.course-tab:hover { color: #7C7A94; }
+.course-tab.active {
+  color: #FEF08A;
+  border-bottom-color: #FEF08A;
+}
+
+/* ══════════════════════════════════════════
+   BODY
+══════════════════════════════════════════ */
+.body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 430px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: #12101A;
+  border-right: 1px solid #2A2538;
+  padding: 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.3rem;
+  letter-spacing: 0.1em;
+  padding: 0 1.1rem;
+  margin: 1.1rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sb-label:first-child { margin-top: 0; }
+.label-f { color: #FBCFE8; }
+.label-q { color: #A8E6C8; }
+
+.sb-item {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #3D3B52;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.1s;
+}
+.sb-item:hover { background: #1A1726; color: #7C7A94; }
+.sb-item.active {
+  background: #1A1726;
+  color: #FBCFE8;
+  border-left-color: #F472B6;
+  font-weight: 700;
+}
+
+.sb-sub {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #2D2B3D;
+  padding: 0.35rem 1.1rem 0.35rem 2.1rem;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: color 0.1s;
+}
+.sb-sub:hover { color: #4D4B64; }
+.sb-sub.active {
+  color: #FBCFE8;
+  border-left-color: rgba(244,114,182,0.35);
+}
+
+.sb-divider {
+  height: 1px;
+  background: #2A2538;
+  margin: 0.8rem 1.1rem;
+}
+
+/* icono pequeño en sidebar label */
+.sb-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* ── CONTENT ── */
+.content {
+  background: #1A1726;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* icono decorativo esquina content */
+.content-deco {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.2rem;
+  opacity: 0.06;
+}
+
+.content-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: #F472B6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.content-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #F5F0FF;
+  letter-spacing: -0.02em;
+  line-height: 1.22;
+  margin-bottom: 0.4rem;
+}
+
+.content-desc {
+  font-size: 0.77rem;
+  color: #4D4B64;
+  line-height: 1.65;
+  max-width: 380px;
+}
+
+/* ── CARDS ── */
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+}
+
+.sim-card {
+  background: #12101A;
+  border: 1px solid #2A2538;
+  border-radius: 10px;
+  padding: 0.95rem 1rem 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.12s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.sim-card:hover {
+  border-color: #3D3B52;
+  transform: translateY(-1px);
+}
+.sim-card.featured {
+  border-color: #F472B6;
+  box-shadow: 0 0 0 1px rgba(244,114,182,0.1), 0 4px 20px rgba(244,114,182,0.07);
+}
+
+/* icono decorativo en esquina de card */
+.card-deco {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.6rem;
+  opacity: 0.12;
+}
+.sim-card.featured .card-deco { opacity: 0.18; }
+
+.sim-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.17rem 0.5rem;
+  border-radius: 3px;
+  align-self: flex-start;
+  margin-bottom: 0.1rem;
+}
+.tag-f { background: rgba(244,114,182,0.1); color: #F472B6; }
+.tag-q { background: rgba(168,230,200,0.1); color: #A8E6C8; }
+
+.sim-name {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #4D4B64;
+  line-height: 1.3;
+}
+.sim-card.featured .sim-name { color: #F5F0FF; }
+
+.sim-meta {
+  font-size: 0.64rem;
+  color: #2D2B3D;
+}
+
+.sim-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+.sim-arrow {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.4rem;
+  color: #2D2B3D;
+  transition: color 0.12s;
+}
+.sim-card:hover .sim-arrow    { color: #7C7A94; }
+.sim-card.featured .sim-arrow { color: #F472B6; }
+.feat-q .sim-arrow            { color: #A8E6C8; }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.footer {
+  background: #12101A;
+  border-top: 1px solid #2A2538;
+  padding: 0.58rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-sig {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.52rem;
+  color: #2D2B3D;
+  letter-spacing: 0.04em;
+}
+.footer-sig span { color: #3D3B52; }
+.footer-cc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  color: #2D2B3D;
+}
+.footer-cc a { color: #3D3B52; text-decoration: none; }
+.footer-cc a:hover { color: #F472B6; }
+
+</style>
+</head>
+<body>
+<div class="portal">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <!-- átomo pixel pequeño como logo -->
+    <svg width="28" height="28" viewBox="0 0 7 7" xmlns="http://www.w3.org/2000/svg">
+      <!-- órbita elipse 1 -->
+      <rect x="0" y="3" width="2" height="1" fill="#BAE6FD"/>
+      <rect x="5" y="3" width="2" height="1" fill="#BAE6FD"/>
+      <rect x="1" y="1" width="1" height="1" fill="#BAE6FD"/>
+      <rect x="5" y="1" width="1" height="1" fill="#BAE6FD"/>
+      <rect x="1" y="5" width="1" height="1" fill="#BAE6FD"/>
+      <rect x="5" y="5" width="1" height="1" fill="#BAE6FD"/>
+      <!-- órbita elipse 2 (diagonal) -->
+      <rect x="3" y="0" width="1" height="2" fill="#F472B6"/>
+      <rect x="3" y="5" width="1" height="2" fill="#F472B6"/>
+      <!-- núcleo -->
+      <rect x="2" y="2" width="3" height="3" fill="#A8E6C8"/>
+      <rect x="3" y="2" width="1" height="1" fill="#C8F8E8"/>
+      <!-- electrones -->
+      <rect x="0" y="3" width="1" height="1" fill="#FEF08A"/>
+      <rect x="6" y="3" width="1" height="1" fill="#FEF08A"/>
+      <rect x="3" y="0" width="1" height="1" fill="#FEF08A"/>
+    </svg>
+
+    <div class="logo-text">
+      <span class="logo-f">Física</span>
+      <span class="logo-amp"> &amp; </span>
+      <span class="logo-q">Química</span>
+    </div>
+
+    <div class="header-right">
+      <div class="lang-wrap">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSE TABS -->
+  <div class="courses">
+    <button class="course-tab">2º ESO</button>
+    <button class="course-tab">3º ESO</button>
+    <button class="course-tab active">4º ESO</button>
+    <button class="course-tab">1º BACH</button>
+    <button class="course-tab">2º BACH</button>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div class="sb-label label-f">
+        <!-- rayo clásico: ancho arriba, punta abajo --> 
+        <svg class="sb-icon" width="11" height="18" viewBox="0 0 6 9" xmlns="http://www.w3.org/2000/svg">
+          <!-- parte superior ancha --> 
+          <rect x="2" y="0" width="4" height="1" fill="#FBBF24"/>
+          <rect x="1" y="1" width="4" height="1" fill="#FBBF24"/>
+          <rect x="0" y="2" width="4" height="1" fill="#FBBF24"/>
+          <rect x="0" y="3" width="6" height="1" fill="#FBBF24"/>
+          <!-- vértice / codo --> 
+          <rect x="2" y="4" width="3" height="1" fill="#FBBF24"/>
+          <!-- parte inferior estrechando hacia punta --> 
+          <rect x="2" y="5" width="2" height="1" fill="#FBBF24"/>
+          <rect x="1" y="6" width="2" height="1" fill="#FBBF24"/>
+          <rect x="1" y="7" width="1" height="1" fill="#FBBF24"/>
+          <rect x="0" y="8" width="1" height="1" fill="#FBBF24"/>
+        </svg>
+        Física
+      </div>
+      <div class="sb-item">Cinemática</div>
+      <div class="sb-item active">Dinámica</div>
+      <div class="sb-sub active">Fuerzas y leyes</div>
+      <div class="sb-sub">Plano inclinado</div>
+      <div class="sb-sub">Rozamiento</div>
+      <div class="sb-item">Energía</div>
+      <div class="sb-item">Ondas y sonido</div>
+      <div class="sb-item">Electricidad</div>
+
+      <div class="sb-divider"></div>
+
+      <div class="sb-label label-q">
+        <!-- matraz erlenmeyer pixel -->
+        <svg class="sb-icon" width="14" height="14" viewBox="0 0 7 7" xmlns="http://www.w3.org/2000/svg">
+          <!-- cuello -->
+          <rect x="2" y="0" width="3" height="1" fill="#A8E6C8"/>
+          <rect x="2" y="1" width="3" height="1" fill="#A8E6C8"/>
+          <!-- hombros -->
+          <rect x="1" y="2" width="1" height="1" fill="#A8E6C8"/>
+          <rect x="5" y="2" width="1" height="1" fill="#A8E6C8"/>
+          <rect x="2" y="2" width="3" height="1" fill="#A8E6C8"/>
+          <!-- cuerpo -->
+          <rect x="1" y="3" width="5" height="1" fill="#A8E6C8"/>
+          <rect x="0" y="4" width="7" height="1" fill="#A8E6C8"/>
+          <!-- líquido interior -->
+          <rect x="1" y="4" width="5" height="1" fill="#10B981"/>
+          <rect x="2" y="3" width="1" height="1" fill="#C8F8E8"/>
+          <!-- base -->
+          <rect x="0" y="5" width="7" height="1" fill="#A8E6C8"/>
+          <rect x="1" y="6" width="5" height="1" fill="#059669"/>
+        </svg>
+        Química
+      </div>
+      <div class="sb-item">Tabla periódica</div>
+      <div class="sb-item">Enlace químico</div>
+      <div class="sb-item">Reacciones</div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <div>
+        <div class="content-eyebrow">4º ESO · Dinámica</div>
+        <div class="content-title">Fuerzas y leyes<br>de Newton</div>
+        <div class="content-desc">Explora las leyes del movimiento con simulaciones interactivas. Ajusta parámetros y observa qué ocurre en tiempo real.</div>
+      </div>
+
+      <div class="sim-grid">
+
+        <div class="sim-card featured">
+          <span class="sim-tag tag-f">Física</span>
+          <div class="sim-name">Plano inclinado</div>
+          <div class="sim-meta">Rozamiento · 2.ª ley de Newton</div>
+          <div class="sim-footer"><span class="sim-arrow">▶</span></div>
+        </div>
+
+        <div class="sim-card">
+          <span class="sim-tag tag-f">Física</span>
+          <div class="sim-name">Diagrama de fuerzas</div>
+          <div class="sim-meta">Equilibrio · Vectores</div>
+          <div class="sim-footer"><span class="sim-arrow">▶</span></div>
+        </div>
+
+        <div class="sim-card">
+          <span class="sim-tag tag-f">Física</span>
+          <div class="sim-name">Poleas y máquinas</div>
+          <div class="sim-meta">Ventaja mecánica · Trabajo</div>
+          <div class="sim-footer"><span class="sim-arrow">▶</span></div>
+        </div>
+
+        <div class="sim-card feat-q" style="border-color:#A8E6C8; box-shadow: 0 0 0 1px rgba(168,230,200,0.1);">
+          <span class="sim-tag tag-q">Química</span>
+          <div class="sim-name">Ajuste de ecuaciones</div>
+          <div class="sim-meta">Estequiometría · Conservación</div>
+          <div class="sim-footer"><span class="sim-arrow" style="color:#A8E6C8">▶</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-sig">© <span>Sara G.M.</span> · Física y Química</div>
+    <div class="footer-cc">
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
