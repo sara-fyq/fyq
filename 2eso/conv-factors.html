@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factores de conversión · F&amp;Q</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#12101A; --panel:#1B1826; --panel2:#231F31; --line:#352F48;
+  --text:#ECE8F5; --muted:#9C95B2;
+  --fuchsia:#F472B6; --mint:#A8E6C8; --lemon:#FEF08A; --red:#F87171;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Nunito,system-ui,sans-serif;font-size:15px;line-height:1.45}
+button{font-family:inherit}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.brand{font-family:"Press Start 2P",monospace;font-size:13px;color:var(--fuchsia);letter-spacing:1px;white-space:nowrap}
+.title{font-family:"Press Start 2P",monospace;font-size:11px;line-height:1.6;color:var(--text);margin:0;font-weight:400}
+.levels{display:flex;flex-wrap:wrap;gap:8px;flex:1}
+.lvl{font-family:"Press Start 2P",monospace;font-size:10px;line-height:1.5;padding:9px 12px;background:var(--panel2);color:var(--muted);border:2px solid var(--line);border-radius:6px;cursor:pointer}
+.lvl:hover{color:var(--text)}
+.lvl.on{background:var(--lemon);border-color:var(--lemon);color:#12101A}
+.lang{display:flex;gap:4px}
+.lang button{font-family:"JetBrains Mono",monospace;font-size:12px;padding:5px 8px;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:5px;cursor:pointer}
+.lang button.on{color:#12101A;background:var(--fuchsia);border-color:var(--fuchsia)}
+main{max-width:1060px;margin:0 auto;padding:16px 16px 24px}
+.stats{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-bottom:12px;color:var(--muted)}
+.stat b{font-family:"JetBrains Mono",monospace;color:var(--text);font-size:16px;margin-left:6px}
+.stats .grow{flex:1}
+.btn{font-weight:700;font-size:14px;padding:9px 14px;border-radius:8px;border:2px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--fuchsia);border-color:var(--fuchsia);color:#12101A}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent}
+.btn[hidden]{display:none}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.ptop{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.pid{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)}
+.statement{font-size:21px;font-weight:800;margin:2px 0}
+.instr{color:var(--muted);margin:0 0 12px}
+.kbd{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.kbd span{color:var(--muted);font-size:13px;margin-right:4px}
+.kbd button{font-family:"JetBrains Mono",monospace;font-size:16px;min-width:46px;padding:5px 10px;background:var(--panel2);color:var(--lemon);border:2px solid var(--line);border-radius:6px;cursor:pointer}
+.kbd button:disabled{color:#4a4460;cursor:default}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:16px 8px;padding:16px 2px 12px;font-family:"JetBrains Mono",monospace}
+.qty{font-size:22px;white-space:nowrap}
+.ua.x,input.x{text-decoration:line-through;text-decoration-color:var(--fuchsia);text-decoration-thickness:2px;color:var(--muted)}
+.factor{display:flex;align-items:center;gap:4px}
+.dot{font-size:26px;color:var(--muted);padding:0 2px}
+.frac{display:flex;flex-direction:column;gap:6px;padding:9px 8px 8px;border:2px solid transparent;border-radius:10px;position:relative}
+.factor.ok .frac{border-color:var(--mint)}
+.factor.bad .frac{border-color:var(--red)}
+.fi{position:absolute;top:-10px;left:8px;font-size:11px;background:var(--panel);color:var(--muted);padding:0 4px}
+.row{display:flex;gap:4px}
+.bar{height:2px;background:var(--text);border-radius:2px}
+input{font-family:"JetBrains Mono",monospace;font-size:17px;background:var(--panel2);color:var(--text);border:2px solid var(--line);border-radius:6px;padding:6px;text-align:center;min-width:0}
+input:focus{outline:none;border-color:var(--fuchsia)}
+input::placeholder{color:#5d5672;font-size:13px}
+input:disabled{opacity:.85}
+input.num{width:9ch}
+input.unit{width:7ch}
+input.okb{border-color:var(--mint)}
+input.badb{border-color:var(--red)}
+.rm{background:transparent;border:0;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;padding:2px 4px;align-self:flex-start}
+.rm:hover{color:var(--red)}
+.rm[hidden]{display:none}
+.add{font-family:"JetBrains Mono",monospace;font-size:14px;padding:8px 10px;background:transparent;color:var(--mint);border:2px dashed var(--line);border-radius:8px;cursor:pointer}
+.add:hover{border-color:var(--mint)}
+.add[hidden]{display:none}
+.eq{font-size:26px;color:var(--muted)}
+.res{display:flex;align-items:center;gap:6px;font-size:20px;white-space:nowrap}
+.res input.num{width:11ch}
+.readout{color:var(--muted);font-size:14px;margin:0 0 12px}
+.mark{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-left:8px;border-radius:50%;font-weight:800;font-size:15px;vertical-align:middle}
+.mark[hidden]{display:none}
+.mark.ok{color:var(--mint);border:2px solid var(--mint)}
+.mark.bad{color:var(--red);border:2px solid var(--red);background:rgba(248,113,113,.14);animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.btn.hintb{border-color:var(--lemon);color:var(--lemon)}
+.btn.solb{border-color:var(--fuchsia);color:var(--fuchsia)}
+.readout b{font-family:"JetBrains Mono",monospace;color:var(--lemon);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.att{color:var(--muted);font-size:13px}
+.fb{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px}
+.fb li{padding:8px 12px;border-radius:8px;background:var(--panel2);border-left:4px solid var(--line)}
+.fb li.ok{border-left-color:var(--mint)}
+.fb li.bad{border-left-color:var(--red)}
+.fb li.note{color:var(--muted)}
+.success{margin-top:14px;padding:12px 14px;border-radius:10px;background:rgba(168,230,200,.10);border:2px solid var(--mint)}
+.success .big{font-size:18px;font-weight:800;color:var(--mint)}
+.panel{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--panel2);border:2px solid var(--lemon)}
+.panel.sol{border-color:var(--fuchsia)}
+.panel h3{margin:0 0 8px;font-family:"Press Start 2P",monospace;font-size:11px;font-weight:400;color:var(--lemon)}
+.panel.sol h3{color:var(--fuchsia)}
+.panel ul{margin:6px 0 0;padding-left:20px;font-family:"JetBrains Mono",monospace}
+.panel .chain{padding:8px 0}
+.sfrac{display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:0 4px;font-size:17px}
+.sfrac .bar{align-self:stretch}
+details{margin-top:18px;color:var(--muted)}
+summary{cursor:pointer;color:var(--text);font-weight:700}
+details ul{margin:8px 0;padding-left:20px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 16px 18px}
+footer a{color:var(--muted)}
+.overlay{position:fixed;inset:0;background:rgba(10,8,16,.82);display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto;z-index:10}
+.overlay[hidden]{display:none}
+.modal{background:var(--panel);border:2px solid var(--fuchsia);border-radius:14px;padding:20px;max-width:760px;width:100%}
+.modal h2{font-family:"Press Start 2P",monospace;font-size:13px;font-weight:400;color:var(--fuchsia);margin:0 0 12px;line-height:1.6}
+.meta{color:var(--muted)}
+.meta b{color:var(--text)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:center}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:700}
+td{font-family:"JetBrains Mono",monospace}
+td:first-child{font-family:Nunito,system-ui,sans-serif;font-weight:700}
+tr.tot td{font-weight:800;color:var(--lemon)}
+.pct{font-size:17px;font-weight:800;color:var(--mint);margin:6px 0 14px}
+@media (max-width:560px){
+  .statement{font-size:18px}
+  input{font-size:16px}
+  input.num{width:8ch}
+  input.unit{width:6ch}
+  .qty{font-size:19px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand" data-i="brand">F&amp;Q</div>
+  <h1 class="title" data-i="title"></h1>
+  <div class="levels">
+    <button class="lvl" data-lvl="1" data-i="lvl1"></button>
+    <button class="lvl" data-lvl="2" data-i="lvl2"></button>
+    <button class="lvl" data-lvl="3" data-i="lvl3"></button>
+  </div>
+  <div class="lang"><button data-lang="es">ES</button><button data-lang="en">EN</button></div>
+</header>
+
+<main>
+  <div class="stats">
+    <span class="stat"><span data-i="correct"></span><b id="stC">0</b></span>
+    <span class="stat"><span data-i="streak"></span><b id="stS">0</b></span>
+    <span class="stat"><span data-i="tried"></span><b id="stT">0</b></span>
+    <span class="grow"></span>
+    <button class="btn ghost" id="finishB" data-i="finish"></button>
+  </div>
+
+  <section class="card">
+    <div class="ptop"><div class="statement" id="statement"></div><span class="pid" id="pid"></span></div>
+    <p class="instr" data-i="instr"></p>
+    <div class="kbd">
+      <span data-i="keyboard"></span>
+      <button type="button" data-ins="mu" data-ti="kbMu" disabled>µ</button>
+      <button type="button" data-ins="sq" data-ti="kbSq" disabled>x²</button>
+      <button type="button" data-ins="cu" data-ti="kbCu" disabled>x³</button>
+      <button type="button" data-ins="pow" data-ti="kbPow" disabled>×10ⁿ</button>
+    </div>
+    <div class="chain" id="chain">
+      <div class="qty" id="qty"></div>
+      <div id="factors" style="display:contents"></div>
+      <button type="button" class="add" id="addB" data-i="add"></button>
+      <span class="eq">=</span>
+      <div class="res">
+        <input class="num" id="resNum" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <span id="resUnit"></span>
+        <input class="unit" id="resUnitIn" autocomplete="off" autocapitalize="off" spellcheck="false" hidden>
+      </div>
+    </div>
+    <div class="readout"><span data-i="remaining"></span> <b id="remain"></b><span id="remMark" class="mark" hidden></span></div>
+    <div class="actions">
+      <button class="btn primary" id="checkB" data-i="check"></button>
+      <button class="btn" id="skipB" data-i="skip"></button>
+      <button class="btn hintb" id="hintB" data-i="showHint" hidden></button>
+      <button class="btn solb" id="solB" data-i="showSol" hidden></button>
+      <button class="btn primary" id="nextB" data-i="next" hidden></button>
+      <span class="att" id="att"></span>
+    </div>
+    <div id="successBox"></div>
+    <ul class="fb" id="fb"></ul>
+    <div id="hintBox"></div>
+    <div id="solBox"></div>
+    <details><summary data-i="howT"></summary><ul id="how"></ul></details>
+  </section>
+</main>
+
+<footer>© Sara G.M. · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></footer>
+
+<div class="overlay" id="overlay" hidden><div class="modal" id="modal"></div></div>
+
+<script>
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MU='\u00B5';
+const SUP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻','−':'⁻','+':''};
+const SUPINV={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+const sup=s=>[...String(s)].map(c=>SUP[c]??c).join('');
+let LANG='es';
+
+/* =========================================================
+   Textos ES / EN
+   ========================================================= */
+const I18N={
+es:{
+  brand:'F&Q', title:'Factores de conversión', lvl1:'Fácil', lvl2:'Medio', lvl3:'Difícil',
+  correct:'Correctos', streak:'Racha', tried:'Intentados', finish:'Terminar por hoy',
+  keyboard:'Teclado:', kbMu:'Símbolo micro (µ)', kbPow:'Potencia de diez', kbSq:'Al cuadrado', kbCu:'Al cubo',
+  check:'Comprobar', skip:'Otro problema', next:'Siguiente problema', add:'+ Factor', remove:'Quitar este factor',
+  instr:'Completa el factor de conversión con números y unidades arriba y abajo. Añade más factores si los necesitas y escribe el resultado.',
+  remaining:'Unidades que quedan:',
+  attempts:n=>`Intentos: ${n}`, attemptsNote:'pista disponible a los 3 intentos · solución a los 5',
+  showHint:'Ver pista', showSol:'Ver solución',
+  markOk:'Unidades bien colocadas', markBad:'Revisa cómo has colocado las unidades', withSol:'después de ver la solución',
+  numPh:'nº', unitPh:'ud.', factor:i=>`Factor ${i}`, units:'Unidades', result:'Resultado',
+  stC:(v,f,t)=>`Convierte ${v} ${f} a ${t}.`, stSI:(v,f)=>`Expresa en unidades del SI: ${v} ${f}.`,
+  qSecWeek:'¿Cuántos segundos hay en una semana?', qHourYear:'¿Cuántas horas hay en un año?',
+  num:'numerador', den:'denominador',
+  fIncomplete:'Completa los números y las unidades de arriba y de abajo.',
+  badNum:s=>`No entiendo el número del ${s}.`,
+  err_emptyUnit:'Falta la unidad.', err_syntax:'Revisa cómo has escrito la unidad.',
+  err_kilo:'El símbolo de kilo es k minúscula (km, kg…).', err_litre:'El símbolo del litro es L.',
+  err_second:'El símbolo del segundo es s.', err_gram:'El símbolo del gramo es g.',
+  err_metre:'El símbolo del metro es m, sin s ni punto.', err_cc:'Escribe cm³ en lugar de cc.',
+  err_case:(t,k)=>`Cuidado con mayúsculas y minúsculas: «${t}» no es una unidad. ¿Querías decir ${k}?`,
+  err_unknown:t=>`No reconozco la unidad «${t}».`,
+  compound:'Cada factor cambia una sola unidad: usa un factor para cada magnitud (por ejemplo, uno para la longitud y otro para el tiempo).',
+  timeSq:'El tiempo no se eleva al cuadrado: pon el factor del tiempo dos veces.',
+  powOnly:'Solo las unidades de longitud se elevan al cuadrado o al cubo.',
+  dims:(a,b)=>`${a} y ${b} no miden la misma magnitud, así que no pueden ser equivalentes.`,
+  same:'Arriba y abajo tienes la misma unidad: este factor no cambia nada.',
+  eqWrong:(a,b)=>`${a} no es igual a ${b}.`,
+  tipPow:' Revisa la potencia de diez (el número de ceros).',
+  tipArea:' En superficies, cada escalón de prefijo vale 100.',
+  tipVol:' En volúmenes, cada escalón de prefijo vale 1000.',
+  tipTime:' El tiempo no es decimal: 1 h = 60 min y 1 min = 60 s.',
+  eqRounded:(a,b)=>`${a} = ${b} es una equivalencia redondeada. Escríbela exacta: pon el 1 en la unidad mayor.`,
+  flip:(u,w)=>`El factor está al revés: ${u} debe ir en el ${w} para cancelarse.`,
+  noCancel:c=>`Ninguna unidad de este factor se cancela con las que tienes (${c}).`,
+  fOk:'Equivalencia correcta y bien colocada.',
+  endWrong:(c,t)=>`Al final te queda ${c} y tienes que llegar a ${t}.`,
+  endOk:t=>`Las unidades se cancelan y llegas a ${t}.`,
+  resEmpty:'Escribe el resultado.', resBad:'No entiendo el número del resultado.',
+  resPow:'El resultado no es correcto: revisa la potencia de diez.',
+  resClose:'Casi: revisa el cálculo o redondea con más cifras.',
+  resFewSig:'Tienes pocas cifras significativas: redondea el resultado con 3 o 4.',
+  resManySig:'Tienes demasiadas cifras: redondea el resultado a 3 o 4 cifras significativas.',
+  resWrong:'El resultado no es correcto: revisa las operaciones.',
+  resUnitWrong:'Esa no es la unidad del SI de esta magnitud.',
+  resOk:'Resultado correcto.',
+  incompleteNote:'Completa todas las casillas para que cuente como intento.',
+  success:'¡Correcto!', solvedHow:h=>`Resuelto ${h}.`,
+  first:'a la primera', inN:n=>`en ${n} intentos`, withHint:'con pista',
+  fewer:(u,m)=>`Has usado ${u} factores; se puede hacer con ${m===1?'1 factor':m+' factores'}.`,
+  hintT:'Pista', hintIntro:'Estas equivalencias te sirven. Colócalas tú para que se cancelen las unidades:',
+  solT:'Solución', solNote:'Fíjate en qué unidades se tachan. Pulsa «Siguiente problema» para seguir.',
+  howT:'¿Cómo funciona?',
+  how:[
+    'En cada factor escribe una equivalencia: abajo, la unidad que quieres eliminar; arriba, la nueva.',
+    'Las unidades que se cancelan se tachan solas, y debajo ves las que te quedan.',
+    'Si necesitas más factores, pulsa «+ Factor». En velocidad, por ejemplo, usa uno para la longitud y otro para el tiempo.',
+    'Potencias de diez: botón ×10ⁿ, o escribe 3e-5 o 3*10^-5.',
+    'Si el resultado no es exacto, redondéalo a 3 o 4 cifras significativas.',
+    'Para µ, ² y ³ usa los botones del teclado. También puedes escribir u (um), m2 o m3.',
+    'Convenios: 1 semana = 7 días · 1 mes = 30 días · 1 año = 365 días · 1 L = 1 dm³ · 1 atm = 101325 Pa = 760 mmHg.'
+  ],
+  sumT:'Resumen de la sesión', date:'Inicio', duration:'Duración', minutes:n=>`${n} min`,
+  colLvl:'Nivel', colTried:'Intentados', colFirst:'A la primera', colMore:'Varios intentos', colHint:'Con pista', colSol:'Con solución', colSkip:'Saltados', total:'Total',
+  pct:p=>`Has acertado el ${p} % de los problemas que has intentado.`, none:'Todavía no has intentado ningún problema.',
+  keepGoing:'Seguir practicando', newSession:'Empezar sesión nueva'
+},
+en:{
+  brand:'P&C', title:'Conversion factors', lvl1:'Easy', lvl2:'Medium', lvl3:'Hard',
+  correct:'Correct', streak:'Streak', tried:'Attempted', finish:'Finish for today',
+  keyboard:'Keyboard:', kbMu:'Micro symbol (µ)', kbPow:'Power of ten', kbSq:'Squared', kbCu:'Cubed',
+  check:'Check', skip:'Another problem', next:'Next problem', add:'+ Factor', remove:'Remove this factor',
+  instr:'Fill in the conversion factor with numbers and units on top and bottom. Add more factors if you need them and write the result.',
+  remaining:'Units left:',
+  attempts:n=>`Attempts: ${n}`, attemptsNote:'hint available after 3 attempts · solution after 5',
+  showHint:'Show hint', showSol:'Show solution',
+  markOk:'Units correctly placed', markBad:'Check how you placed the units', withSol:'after seeing the solution',
+  numPh:'no.', unitPh:'unit', factor:i=>`Factor ${i}`, units:'Units', result:'Result',
+  stC:(v,f,t)=>`Convert ${v} ${f} to ${t}.`, stSI:(v,f)=>`Express in SI units: ${v} ${f}.`,
+  qSecWeek:'How many seconds are there in a week?', qHourYear:'How many hours are there in a year?',
+  num:'numerator', den:'denominator',
+  fIncomplete:'Fill in the numbers and units on top and bottom.',
+  badNum:s=>`I can't read the number in the ${s}.`,
+  err_emptyUnit:'The unit is missing.', err_syntax:'Check how you wrote the unit.',
+  err_kilo:'The symbol for kilo is a lowercase k (km, kg…).', err_litre:'The symbol for litre is L.',
+  err_second:'The symbol for second is s.', err_gram:'The symbol for gram is g.',
+  err_metre:'The symbol for metre is m, with no s or full stop.', err_cc:'Write cm³ instead of cc.',
+  err_case:(t,k)=>`Watch upper and lower case: “${t}” is not a unit. Did you mean ${k}?`,
+  err_unknown:t=>`I don't recognise the unit “${t}”.`,
+  compound:'Each factor changes only one unit: use one factor for each quantity (for example, one for length and another for time).',
+  timeSq:'Time is not squared: use the time factor twice.',
+  powOnly:'Only length units can be squared or cubed.',
+  dims:(a,b)=>`${a} and ${b} don't measure the same quantity, so they can't be equivalent.`,
+  same:'You have the same unit on top and bottom: this factor changes nothing.',
+  eqWrong:(a,b)=>`${a} is not equal to ${b}.`,
+  tipPow:' Check the power of ten (the number of zeros).',
+  tipArea:' For areas, each prefix step is worth 100.',
+  tipVol:' For volumes, each prefix step is worth 1000.',
+  tipTime:' Time is not decimal: 1 h = 60 min and 1 min = 60 s.',
+  eqRounded:(a,b)=>`${a} = ${b} is a rounded equivalence. Write it exactly: put the 1 on the larger unit.`,
+  flip:(u,w)=>`The factor is upside down: ${u} must go in the ${w} to cancel.`,
+  noCancel:c=>`No unit in this factor cancels with the ones you have (${c}).`,
+  fOk:'Correct equivalence, correctly placed.',
+  endWrong:(c,t)=>`You end up with ${c} and you need to reach ${t}.`,
+  endOk:t=>`The units cancel and you reach ${t}.`,
+  resEmpty:'Write the result.', resBad:"I can't read the result.",
+  resPow:'The result is not correct: check the power of ten.',
+  resClose:'Almost: check your calculation or round with more figures.',
+  resFewSig:'Too few significant figures: round the result to 3 or 4.',
+  resManySig:'Too many figures: round the result to 3 or 4 significant figures.',
+  resWrong:'The result is not correct: check your calculations.',
+  resUnitWrong:'That is not the SI unit for this quantity.',
+  resOk:'Correct result.',
+  incompleteNote:'Fill in every box for it to count as an attempt.',
+  success:'Correct!', solvedHow:h=>`Solved ${h}.`,
+  first:'on the first try', inN:n=>`in ${n} attempts`, withHint:'with a hint',
+  fewer:(u,m)=>`You used ${u} factors; it can be done with ${m===1?'1 factor':m+' factors'}.`,
+  hintT:'Hint', hintIntro:'These equivalences will help. Place them yourself so the units cancel:',
+  solT:'Solution', solNote:'Look at which units are crossed out. Press “Next problem” to continue.',
+  howT:'How does it work?',
+  how:[
+    'In each factor write an equivalence: the unit you want to remove goes on the bottom, the new one on top.',
+    'Units that cancel are crossed out automatically, and below you can see the ones you have left.',
+    'If you need more factors, press “+ Factor”. For speed, for example, use one for length and another for time.',
+    'Powers of ten: ×10ⁿ button, or type 3e-5 or 3*10^-5.',
+    'If the result is not exact, round it to 3 or 4 significant figures.',
+    'For µ, ² and ³ use the keyboard buttons. You can also type u (um), m2 or m3.',
+    'Conventions: 1 week = 7 days · 1 month = 30 days · 1 year = 365 days · 1 L = 1 dm³ · 1 atm = 101325 Pa = 760 mmHg.'
+  ],
+  sumT:'Session summary', date:'Started', duration:'Duration', minutes:n=>`${n} min`,
+  colLvl:'Level', colTried:'Attempted', colFirst:'First try', colMore:'More attempts', colHint:'With hint', colSol:'Solution shown', colSkip:'Skipped', total:'Total',
+  pct:p=>`You got ${p} % of the problems you attempted right.`, none:"You haven't attempted any problems yet.",
+  keepGoing:'Keep practising', newSession:'Start a new session'
+}};
+function tr(k,...a){ const v=I18N[LANG][k]; return typeof v==='function'? v(...a) : v; }
+
+/* =========================================================
+   Unidades
+   ========================================================= */
+const PREFIX={n:-9,[MU]:-6,m:-3,c:-2,d:-1,da:1,h:2,k:3,M:6,G:9};
+const BASES={m:['len',[1,0,0,0],1], g:['mass',[0,1,0,0],1e-3], s:['time',[0,0,1,0],1], L:['cap',[3,0,0,0],1e-3],
+             A:['cur',[0,0,0,1],1], N:['force',[1,1,-2,0],1], Pa:['press',[-1,1,-2,0],1]};
+const ATOMS={};
+for (const [b,[kind,dims,si]] of Object.entries(BASES)){
+  ATOMS[b]={kind,dims,si,sym:true};
+  for (const [p,e] of Object.entries(PREFIX)) ATOMS[p+b]={kind,dims,si:si*10**e,sym:true};
+}
+const TD=[0,0,1,0], PD=[-1,1,-2,0];
+Object.assign(ATOMS,{
+  min:{kind:'time',dims:TD,si:60}, h:{kind:'time',dims:TD,si:3600}, dia:{kind:'time',dims:TD,si:86400},
+  sem:{kind:'time',dims:TD,si:604800}, mes:{kind:'time',dims:TD,si:2592000}, ano:{kind:'time',dims:TD,si:31536000},
+  atm:{kind:'press',dims:PD,si:101325}, mmHg:{kind:'press',dims:PD,si:101325/760}
+});
+const WORDS={};
+const addW=(k,list)=>list.split(' ').forEach(w=>WORDS[w]=k);
+addW('min','min mins minuto minutos minute minutes');
+addW('h','h hora horas hour hours hr hrs');
+addW('dia','d dia día dias días day days');
+addW('sem','sem semana semanas week weeks');
+addW('mes','mes meses month months');
+addW('ano','ano año anos años year years');
+addW('atm','atm'); addW('mmHg','mmHg mmhg');
+addW('m','metro metros metre metres meter meters');
+addW('g','gramo gramos gram grams');
+addW('L','litro litros litre litres liter liters');
+addW('s','segundo segundos second seconds');
+addW('A','amperio amperios ampere amperes');
+addW('N','newton newtons');
+addW('Pa','pascal pascales pascals');
+const TW={es:{dia:['día','días'],sem:['semana','semanas'],mes:['mes','meses'],ano:['año','años']},
+          en:{dia:['day','days'],sem:['week','weeks'],mes:['month','months'],ano:['year','years']}};
+
+function lookupName(t){
+  t=t.replace(/\u03BC/g,MU);
+  if (WORDS[t]) return {key:WORDS[t]};
+  if (t.length>=3 && WORDS[t.toLowerCase()]) return {key:WORDS[t.toLowerCase()]};
+  if (ATOMS[t] && ATOMS[t].sym) return {key:t};
+  let m=t.match(/^(da|[nmcdhkMGu\u00B5])?l$/);
+  if (m){ const p=(m[1]||'').replace('u',MU); if (ATOMS[p+'L']) return {key:p+'L'}; }
+  if (t[0]==='u' && ATOMS[MU+t.slice(1)]) return {key:MU+t.slice(1)};
+  if (/^K(m|g|s|L|l|A|N|Pa)$/.test(t)) return {err:'kilo'};
+  if (/^(lt|Lt|LT|lts|ltr|ltrs)$/.test(t)) return {err:'litre'};
+  if (/^(seg|segs|sg|sec|secs|S)$/i.test(t) && t!=='s') return {err:'second'};
+  if (/^(gr|grs|Gr)$/.test(t)) return {err:'gram'};
+  if (/^(mt|mts|Mt|Mts|mtr|mtrs)$/.test(t)) return {err:'metre'};
+  if (/^cc$/i.test(t)) return {err:'cc'};
+  const lc=t.toLowerCase();
+  const cands=Object.keys(ATOMS).filter(k=>ATOMS[k].sym && k.toLowerCase()===lc);
+  if (cands.length) return {err:'case',t,cands};
+  return {err:'unknown',t};
+}
+function parseAtom(raw){
+  let t=raw, exp=1;
+  const m=t.match(/^(.*?)(?:\^([+-]?\d+)|(⁻?[⁰¹²³⁴⁵⁶⁷⁸⁹]+)|(\d+))$/);
+  if (m && m[1]){
+    t=m[1];
+    const e = m[2]!==undefined ? m[2] : m[3]!==undefined ? [...m[3]].map(c=>SUPINV[c]).join('') : m[4];
+    exp=parseInt(e,10);
+    if (!exp) return {err:'syntax'};
+  }
+  if (!t) return {err:'syntax'};
+  const r=lookupName(t);
+  if (r.err) return r;
+  return {key:r.key,exp};
+}
+function parseUnit(str){
+  const s=String(str||'').replace(/\s+/g,'').replace(/\u03BC/g,MU).replace(/[⋅*]/g,'·');
+  if (!s) return {err:'emptyUnit'};
+  const parts=s.split('/'), list=[];
+  for (let i=0;i<parts.length;i++){
+    const part=parts[i].replace(/^\((.*)\)$/,'$1');
+    if (!part) return {err:'syntax'};
+    if (i===0 && part==='1' && parts.length>1) continue;
+    for (const a of part.split('·')){
+      if (!a) return {err:'syntax'};
+      const r=parseAtom(a);
+      if (r.err) return r;
+      list.push({key:r.key,exp:r.exp*(i===0?1:-1)});
+    }
+  }
+  if (!list.length) return {err:'syntax'};
+  const map={};
+  list.forEach(a=>map[a.key]=(map[a.key]||0)+a.exp);
+  return {list,map:clean(map)};
+}
+function unitErr(r){
+  if (r.err==='unknown') return tr('err_unknown',r.t);
+  if (r.err==='case') return tr('err_case',r.t,r.cands.join(' / '));
+  return tr('err_'+r.err);
+}
+
+/* utilidades de expresiones de unidades {clave: exponente} */
+const clean=m=>{ const o={}; for (const k in m) if (m[k]) o[k]=m[k]; return o; };
+const sameMap=(a,b)=>{ a=clean(a); b=clean(b); const ka=Object.keys(a), kb=Object.keys(b); return ka.length===kb.length && ka.every(k=>a[k]===b[k]); };
+const applyF=(cur,num,den)=>{ const o={...cur}; for (const k in num) o[k]=(o[k]||0)+num[k]; for (const k in den) o[k]=(o[k]||0)-den[k]; return clean(o); };
+const mkey=m=>{ m=clean(m); return Object.keys(m).sort().map(k=>k+':'+m[k]).join(','); };
+const dimsOf=m=>{ const d=[0,0,0,0]; for (const k in m){ const a=ATOMS[k]; for (let i=0;i<4;i++) d[i]+=a.dims[i]*m[k]; } return d; };
+const sameDims=(a,b)=>a.every((x,i)=>x===b[i]);
+const siOf=m=>{ let f=1; for (const k in m) f*=ATOMS[k].si**m[k]; return f; };
+// un factor está bien orientado si TODAS las unidades de uno de sus lados se cancelan (al menos en parte)
+function reduces(cur,num,den){
+  const red=(side,sign)=>{ const ks=Object.keys(side); return ks.length>0 && ks.every(k=>{ const c=cur[k]||0, n=c+sign*side[k]; return Math.abs(n)<Math.abs(c); }); };
+  return red(num,1) || red(den,-1);
+}
+
+function atomLabel(k,pl){ const w=TW[LANG][k]; return w? w[pl?1:0] : k; }
+function unitParts(map,plural){
+  const e=Object.entries(map).filter(([,v])=>v);
+  const pl=plural && e.length===1 && e[0][1]===1;
+  return {e,pl,num:e.filter(([,v])=>v>0),den:e.filter(([,v])=>v<0)};
+}
+function unitText(map,plural){
+  const {e,pl,num,den}=unitParts(map,plural);
+  if (!e.length) return '';
+  const f=([k,v])=>atomLabel(k,pl)+(Math.abs(v)!==1?sup(Math.abs(v)):'');
+  let s=num.length? num.map(f).join('·') : '1';
+  if (den.length) s+='/'+(den.length>1?'('+den.map(f).join('·')+')':f(den[0]));
+  return s;
+}
+function unitSpans(map,plural,net){
+  const {pl,num,den}=unitParts(map,plural);
+  const sp=([k,v])=>`<span class="ua${net&&net[k]===0?' x':''}" data-k="${esc(k)}">${esc(atomLabel(k,pl)+(Math.abs(v)!==1?sup(Math.abs(v)):''))}</span>`;
+  let s=num.length? num.map(sp).join('·') : '1';
+  if (den.length) s+='/'+(den.length>1?'('+den.map(sp).join('·')+')':sp(den[0]));
+  return s;
+}
+
+/* =========================================================
+   Números
+   ========================================================= */
+function normNum(str){
+  let s=String(str??'').replace(/\s+/g,'');
+  if (!s) return '';
+  s=s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g,m=>'^'+[...m].map(c=>SUPINV[c]).join(''));
+  s=s.replace(/−/g,'-').replace(/[×xX*⋅]/g,'·');
+  let mant=s, tail='';
+  const i=s.indexOf('·');
+  if (i>=0){ mant=s.slice(0,i); tail=s.slice(i); }
+  if (mant.includes(',')) mant=mant.replace(/\./g,'').replace(',','.');
+  else if (/^[+-]?[1-9]\d{0,2}(\.\d{3})+$/.test(mant)) mant=mant.replace(/\./g,'');
+  return mant+tail;
+}
+function parseNum(str){
+  const s=normNum(str);
+  if (!s) return NaN;
+  let m;
+  if ((m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:·10\^([+-]?\d+))?$/))) return parseFloat(m[1])*(m[2]!==undefined?10**(+m[2]):1);
+  if ((m=s.match(/^([+-]?)10\^([+-]?\d+)$/))) return (m[1]==='-'?-1:1)*10**(+m[2]);
+  if (/^[+-]?(?:\d+\.?\d*|\.\d+)e[+-]?\d+$/i.test(s)) return parseFloat(s);
+  return NaN;
+}
+// cifras significativas de lo que escribe el alumno: {min,max} (los ceros finales de un entero son ambiguos)
+function sigFigs(str){
+  const s=normNum(str);
+  const m=s.match(/^[+-]?(\d*\.?\d*)(?:·10\^[+-]?\d+|e[+-]?\d+)?$/i) || s.match(/^[+-]?()10\^[+-]?\d+$/);
+  if (!m) return null;
+  if (m[1]==='') return {min:1,max:1};
+  const hasDot=m[1].includes('.');
+  const d=m[1].replace('.','').replace(/^0+/,'');
+  if (!d) return {min:1,max:1};
+  if (hasDot) return {min:d.length,max:d.length};
+  return {min:Math.max(1,d.replace(/0+$/,'').length),max:d.length};
+}
+const locDec=s=>s.replace(/\./g,',');   // coma decimal en los dos idiomas
+function fmtIn(s){ return locDec(String(s).replace(/\^([+-]?\d+)/g,(m,g)=>sup(g))); }
+function fmtNum(x,sig=4){
+  if (!isFinite(x)) return '—';
+  if (x===0) return '0';
+  const ex=Math.floor(Math.log10(Math.abs(x))+1e-12);
+  let s;
+  if (ex>=5 || ex<=-4){
+    const [m,e]=x.toExponential(sig-1).split('e');
+    s=String(parseFloat(m))+'·10'+sup(parseInt(e,10));
+  } else if (ex===4 && x!==Math.round(x)){
+    const [m,e]=x.toExponential(sig-1).split('e');
+    s=String(parseFloat(m))+'·10'+sup(parseInt(e,10));
+  } else s=String(ex===4? x : parseFloat(x.toPrecision(sig)));
+  return locDec(s);
+}
+const isApprox=x=>Math.abs(parseNum(fmtNum(x))-x)/Math.abs(x)>1e-9;
+function fmtEqNum(x){
+  const l=Math.log10(x), r=Math.round(l);
+  if (Math.abs(l-r)<1e-9 && (r>=4 || r<=-4)) return '10'+sup(r);
+  return locDec(String(parseFloat(x.toPrecision(10))));
+}
+
+/* =========================================================
+   Banco de problemas: [tipo, valor, de, a, pregunta]
+   tipo: c = convierte · si = expresa en el SI · q = pregunta
+   ========================================================= */
+const RAW={
+1:[ // FÁCIL: un factor (el tiempo, aunque encadene, se considera fácil)
+ ['c','3,6','km','m'],['c','47','cm','m'],['c','0,08','m','mm'],['c','6500','m','hm'],['c','0,4','m','dam'],
+ ['c','3·10^-5','m','um'],['c','7,2·10^-8','m','nm'],['c','1,5','Gm','m'],['c','4,7','Mm','m'],
+ ['c','2,75','kg','g'],['c','380','mg','g'],['c','9·10^4','g','kg'],['c','250','ug','g'],['c','3','ng','g'],['c','2,1','Mg','g'],
+ ['c','3,2','L','mL'],['c','450','mL','L'],['c','0,6','L','cL'],['c','0,02','hL','L'],
+ ['c','350','mA','A'],['c','2,5·10^-4','A','uA'],
+ ['c','180','s','min'],['c','3,5','min','s'],['c','0,75','h','min'],['c','5400','s','h'],['c','48','h','dia'],
+ ['c','0,3','s','ms'],['c','6','sem','dia'],['c','3','ano','dia'],
+ ['c','3','dia','min'],['c','0,2','h','ms'],['c','7200','min','dia'],['q','1','sem','s','qSecWeek'],
+ ['c','9·10^5','s','dia'],['q','1','ano','h','qHourYear'],['c','2·10^6','min','ano'],['c','6','mes','s']
+],
+2:[ // MEDIO: dos factores, velocidad, superficie y volumen en múltiplos de m³
+ ['c','0,35','km','cm'],['c','4,8·10^5','um','dm'],['c','72','mm','hm'],['c','6·10^7','nm','km'],['c','0,9','Gm','km'],
+ ['c','1,6','kg','mg'],['c','8,5·10^3','mg','kg'],['c','45','cL','mL'],['c','2,6','hL','dL'],
+ ['c','90','km/h','m/s'],['c','15','m/s','km/h'],['c','3,6','cm/s','km/h'],['c','800','m/min','km/h'],
+ ['c','0,5','mm/s','m/min'],['c','340','m/s','km/min'],['c','4·10^4','km/h','m/s'],['c','2','cm/min','m/dia'],
+ ['c','2,4','m²','cm²'],['c','650','cm²','m²'],['c','0,03','km²','m²'],['c','8,2·10^6','mm²','m²'],
+ ['c','0,7','km²','dm²'],['c','5,6·10^4','cm²','dam²'],['c','2·10^9','um²','cm²'],['si','12','hm²','m²'],
+ ['c','0,6','m³','dm³'],['c','4500','mm³','cm³'],['c','2,3','m³','cm³'],['c','7,8·10^5','dm³','dam³'],
+ ['c','0,05','km³','dam³'],['c','3,2·10^8','mm³','m³'],['si','9','hm³','m³'],['c','1,4','dm³','mm³']
+],
+3:[ // DIFÍCIL: volumen ↔ capacidad, densidad, aceleración, presión, caudal
+ ['c','2,5','m³','L'],['c','0,04','m³','mL'],['c','650','cm³','L'],['c','3,8','L','cm³'],
+ ['c','1,2·10^4','cL','m³'],['c','75','dL','cm³'],['c','5·10^6','mm³','cL'],['c','0,3','hL','m³'],
+ ['c','2,7','g/cm³','kg/m³'],['c','1030','kg/m³','g/cm³'],['c','0,8','g/mL','kg/m³'],['c','1,2','kg/L','g/cm³'],
+ ['c','13,6','g/cm³','kg/L'],['c','5·10^-3','g/mL','mg/L'],['c','1,29','kg/m³','mg/cm³'],
+ ['c','9,8','m/s²','km/h²'],['c','1,3·10^4','km/h²','m/s²'],['c','4','m/s²','cm/min²'],['c','0,5','km/min²','m/s²'],['c','36','m/min²','cm/s²'],
+ ['c','2,5','N/cm²','N/m²'],['c','1,5·10^5','N/m²','N/cm²'],['c','3','kPa','N/cm²'],['c','0,8','N/mm²','hPa'],
+ ['c','2,5','atm','kPa'],['c','380','mmHg','atm'],['c','1013','hPa','mmHg'],
+ ['si','12','L/min','m³/s'],['c','5','m³/h','L/min'],['c','250','cm³/s','m³/h']
+]};
+const PROBS=[], PBYID={};
+for (const lvl of [1,2,3]) RAW[lvl].forEach((r,i)=>{
+  const [type,v,f,t,q]=r;
+  const id='FMD'[lvl-1]+String(i+1).padStart(2,'0');
+  const from=parseUnit(f).map, to=parseUnit(t).map;
+  const p={id,lvl,type,v,from,to,q,ans:parseNum(v)*siOf(from)/siOf(to)};
+  PROBS.push(p); PBYID[id]=p;
+});
+
+/* =========================================================
+   Equivalencias para las pistas y la solución (búsqueda del camino más corto)
+   ========================================================= */
+const EDGES=[];
+const edge=(A,vA,B,vB)=>EDGES.push({A,vA,B,vB});
+edge({min:1},1,{s:1},60); edge({h:1},1,{min:1},60); edge({h:1},1,{s:1},3600); edge({dia:1},1,{h:1},24);
+edge({sem:1},1,{dia:1},7); edge({mes:1},1,{dia:1},30); edge({ano:1},1,{dia:1},365);
+edge({L:1},1,{dm:3},1); edge({dm:3},1,{cm:3},1000); edge({cm:3},1,{mm:3},1000); edge({dm:3},1,{mm:3},1e6);
+edge({Pa:1},1,{N:1,m:-2},1); edge({atm:1},1,{Pa:1},101325); edge({atm:1},1,{mmHg:1},760);
+for (const [b,exps] of [['m',[1,2,3]],['g',[1]],['L',[1]],['s',[1]],['A',[1]],['N',[1]],['Pa',[1]]])
+  for (const e of exps) for (const [p,pe] of Object.entries(PREFIX)){
+    const k=p+b;
+    if (pe>0) edge({[k]:e},1,{[b]:e},10**(pe*e)); else edge({[b]:e},1,{[k]:e},10**(-pe*e));
+  }
+const EIDX={};
+EDGES.forEach(E=>{ for (const k of new Set([...Object.keys(E.A),...Object.keys(E.B)])) (EIDX[k]=EIDX[k]||[]).push(E); });
+function solve(from,to){
+  const goal=mkey(to);
+  let frontier=[{m:clean(from),path:[]}];
+  const seen=new Set([mkey(from)]);
+  for (let d=0; d<=6; d++){
+    for (const n of frontier) if (mkey(n.m)===goal) return n.path;
+    const next=[];
+    for (const n of frontier){
+      const es=new Set();
+      for (const k in n.m) (EIDX[k]||[]).forEach(E=>es.add(E));
+      for (const E of es) for (const [num,vn,den,vd] of [[E.B,E.vB,E.A,E.vA],[E.A,E.vA,E.B,E.vB]]){
+        if (!reduces(n.m,num,den)) continue;
+        const m=applyF(n.m,num,den), k=mkey(m);
+        if (seen.has(k)) continue;
+        seen.add(k);
+        next.push({m,path:[...n.path,{num,vn,den,vd,E}]});
+      }
+    }
+    frontier=next;
+  }
+  return null;
+}
+const solOf=p=>p.sol||(p.sol=solve(p.from,p.to));
+const eqText=E=>`${fmtEqNum(E.vA)} ${unitText(E.A,E.vA!==1)} = ${fmtEqNum(E.vB)} ${unitText(E.B,E.vB!==1)}`;
+
+/* =========================================================
+   Sesión
+   ========================================================= */
+const SKEY='fyq-factores-sesion';
+function loadSession(){
+  try{
+    const s=JSON.parse(localStorage.getItem(SKEY));
+    if (s && Array.isArray(s.recs) && Date.now()-s.start<12*3600e3) return s;
+  }catch(e){}
+  return {start:Date.now(),recs:[]};
+}
+function saveSession(){ try{ localStorage.setItem(SKEY,JSON.stringify(SESSION)); }catch(e){} }
+let SESSION=loadSession();
+
+const S={lvl:1,p:null,attempts:0,hint:false,sol:false,done:false,succ:null,factors:[],bag:{1:[],2:[],3:[]},lastId:null,focus:null,fbShown:false,needNew:false,mark:null};
+
+function record(o){
+  SESSION.recs.push({id:S.p.id,lvl:S.p.lvl,att:o.att,hint:S.hint,ok:!!o.ok,sol:S.sol||!!o.sol,skip:!!o.skip});
+  saveSession(); updateStats();
+}
+function updateStats(){
+  const r=SESSION.recs;
+  $('#stC').textContent=r.filter(x=>x.ok&&!x.sol).length;
+  $('#stT').textContent=r.length;
+  let s=0; for (let i=r.length-1;i>=0 && r[i].ok && !r[i].sol;i--) s++;
+  $('#stS').textContent=s;
+}
+
+/* =========================================================
+   Entradas: superíndices, µ, teclado
+   ========================================================= */
+function transformInput(el,f){
+  const v=el.value, pos=el.selectionStart??v.length, nv=f(v);
+  if (nv===v) return;
+  const np=f(v.slice(0,pos)).length;
+  el.value=nv;
+  try{ el.setSelectionRange(np,np); }catch(e){}
+}
+const fNum=v=>{
+  let s=v.replace(/(\d)\s*[xX*×]\s*(?=\d)/g,'$1·'), prev;
+  do{ prev=s; s=s.replace(/\^([-−]?\d+)/g,(m,g)=>sup(g)).replace(/([⁰¹²³⁴⁵⁶⁷⁸⁹⁻])([-−]?\d)/g,(m,a,g)=>a+sup(g)); } while (s!==prev);
+  return s;
+};
+const fUnit=v=>v.replace(/\u03BC/g,MU).replace(/(^|[\/·*])u(?=[a-zA-Z])/g,'$1'+MU).replace(/\*/g,'·')
+  .replace(/([a-zA-Z])\^?([23])(?![0-9])/g,(m,a,g)=>a+sup(g)).replace(/\^([23])/g,(m,g)=>sup(g));
+function wireInput(el,onEdit){
+  const isNum=el.classList.contains('num');
+  el.setAttribute('autocomplete','off'); el.setAttribute('autocapitalize','off'); el.setAttribute('spellcheck','false');
+  el.placeholder=tr(isNum?'numPh':'unitPh');
+  el.addEventListener('input',()=>{ transformInput(el,isNum?fNum:fUnit); el.classList.remove('okb','badb'); onEdit&&onEdit(); updateLive(); });
+}
+function setPalette(){
+  const el=S.focus, ok=el && !el.disabled && document.body.contains(el);
+  const isNum=ok && el.classList.contains('num'), isUnit=ok && el.classList.contains('unit');
+  $$('.kbd button').forEach(b=>b.disabled = b.dataset.ins==='pow' ? !isNum : !isUnit);
+}
+function insertAt(el,text){
+  const s=el.selectionStart??el.value.length, e=el.selectionEnd??s;
+  el.value=el.value.slice(0,s)+text+el.value.slice(e);
+  const p=s+text.length;
+  el.focus();
+  try{ el.setSelectionRange(p,p); }catch(err){}
+  el.dispatchEvent(new Event('input',{bubbles:true}));
+}
+
+/* =========================================================
+   Problema en pantalla
+   ========================================================= */
+function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function pick(lvl){
+  if (!S.bag[lvl].length){
+    S.bag[lvl]=shuffle(PROBS.filter(p=>p.lvl===lvl).map(p=>p.id));
+    if (S.bag[lvl][0]===S.lastId && S.bag[lvl].length>1) S.bag[lvl].push(S.bag[lvl].shift());
+  }
+  return PBYID[S.bag[lvl].shift()];
+}
+function leaveProblem(){ if (S.p && !S.done && S.attempts>0) record({skip:true,att:S.attempts}); }
+function newProblem(){
+  leaveProblem();
+  S.p=pick(S.lvl); S.lastId=S.p.id;
+  S.attempts=0; S.hint=false; S.sol=false; S.done=false; S.succ=null; S.fbShown=false; S.mark=null;
+  $('#factors').innerHTML=''; S.factors=[];
+  addFactor();
+  ['#resNum','#resUnitIn'].forEach(s=>{ const el=$(s); el.value=''; el.disabled=false; el.classList.remove('okb','badb','x'); });
+  ['#successBox','#hintBox','#solBox','#fb'].forEach(s=>$(s).innerHTML='');
+  lock(false);
+  renderProblemText(); updateLive(); updateAtt();
+  if (matchMedia('(pointer:fine)').matches) S.factors[0].el.querySelector('input').focus();
+}
+function renderProblemText(){
+  const p=S.p, v=fmtIn(p.v), many=parseNum(p.v)!==1;
+  const fromT=unitText(p.from,many), toT=unitText(p.to,true);
+  $('#statement').textContent = p.type==='q'? tr(p.q) : p.type==='si'? tr('stSI',v,fromT) : tr('stC',v,fromT,toT);
+  $('#pid').textContent=p.id;
+  $('#qty').innerHTML=`<span class="qv">${esc(v)}</span> ${unitSpans(p.from,many)}`;
+  $('#resUnit').textContent = p.type==='si'? '' : toT;
+  $('#resUnitIn').hidden = p.type!=='si';
+}
+function addFactor(){
+  if (S.factors.length>=6) return;
+  const el=document.createElement('div');
+  el.className='factor';
+  el.innerHTML=`<span class="dot">·</span><div class="frac"><span class="fi"></span>
+    <div class="row"><input class="num" data-r="nN"><input class="unit" data-r="nU"></div>
+    <div class="bar"></div>
+    <div class="row"><input class="num" data-r="dN"><input class="unit" data-r="dU"></div></div>
+    <button type="button" class="rm">×</button>`;
+  $('#factors').appendChild(el);
+  const f={el,get:r=>el.querySelector(`[data-r="${r}"]`)};
+  S.factors.push(f);
+  el.querySelectorAll('input').forEach(i=>wireInput(i,()=>{ el.classList.remove('ok','bad'); S.mark=null; }));
+  el.querySelector('.rm').onclick=()=>removeFactor(f);
+  renumber(); updateLive();
+  return f;
+}
+function removeFactor(f){
+  if (S.factors.length<=1) return;
+  S.factors.splice(S.factors.indexOf(f),1); f.el.remove(); S.mark=null;
+  renumber(); updateLive();
+}
+function renumber(){
+  S.factors.forEach((f,i)=>{
+    f.el.querySelector('.fi').textContent=i+1;
+    const rm=f.el.querySelector('.rm'); rm.hidden=S.factors.length<=1 || S.done;
+    rm.title=tr('remove'); rm.setAttribute('aria-label',tr('remove'));
+  });
+  $('#addB').hidden = S.factors.length>=6 || S.done;
+}
+function readF(f){ return {nN:f.get('nN').value.trim(),nU:f.get('nU').value.trim(),dN:f.get('dN').value.trim(),dU:f.get('dU').value.trim()}; }
+const emptyF=v=>!v.nN && !v.nU && !v.dN && !v.dU;
+
+// tachado en vivo y unidades que quedan
+function updateLive(){
+  const p=S.p; if (!p) return;
+  const net={...p.from}, sides=[];
+  S.factors.forEach(f=>[['nU',1],['dU',-1]].forEach(([r,sg])=>{
+    const el=f.get(r), pu=parseUnit(el.value);
+    sides.push({el,map:pu.err?null:pu.map});
+    if (!pu.err) for (const k in pu.map) net[k]=(net[k]||0)+sg*pu.map[k];
+  }));
+  $$('#qty .ua').forEach(sp=>sp.classList.toggle('x',net[sp.dataset.k]===0));
+  sides.forEach(s=>s.el.classList.toggle('x',!!s.map && Object.keys(s.map).every(k=>net[k]===0)));
+  $('#remain').textContent=unitText(clean(net))||'—';
+  renderMark();
+}
+function renderMark(){
+  const m=$('#remMark');
+  m.hidden=!S.mark;
+  if (!S.mark) return;
+  m.className='mark '+S.mark;
+  m.textContent= S.mark==='ok'? '✓' : '!';
+  m.title=tr(S.mark==='ok'?'markOk':'markBad');
+  m.setAttribute('aria-label',m.title);
+}
+
+/* =========================================================
+   Corrección
+   ========================================================= */
+function sideIssue(pu){
+  const L=pu.list;
+  if (L.length>1){
+    const ok=L.length===2 && ATOMS[L[0].key].kind==='force' && L[0].exp===1 && ATOMS[L[1].key].kind==='len' && L[1].exp===-2;
+    return ok? null : 'compound';
+  }
+  const a=L[0];
+  if (a.exp<0) return 'compound';
+  if (a.exp!==1){
+    const k=ATOMS[a.key].kind;
+    if (k==='len' && (a.exp===2 || a.exp===3)) return null;
+    return k==='time'? 'timeSq' : 'powOnly';
+  }
+  return null;
+}
+const allKind=(m,kind)=>Object.keys(m).every(k=>ATOMS[k].kind===kind);
+function evaluate(){
+  const p=S.p, out={factors:[],complete:true,used:0};
+  let cur={...p.from}, allOk=true, broken=false;
+  let facs=S.factors.filter(f=>!emptyF(readF(f)));
+  if (!facs.length) facs=[S.factors[0]];
+  facs.forEach(f=>{
+    const idx=S.factors.indexOf(f)+1, r={idx,el:f.el,msgs:[],bad:[]}, v=readF(f);
+    if (!v.nN || !v.nU || !v.dN || !v.dU){
+      r.msgs.push(tr('fIncomplete')); out.complete=false; allOk=false; broken=true;
+      ['nN','nU','dN','dU'].forEach(k=>{ if (!v[k]) r.bad.push(k); });
+      out.factors.push(r); return;
+    }
+    out.used++;
+    const vn=parseNum(v.nN), vd=parseNum(v.dN);
+    if (!(vn>0)){ r.msgs.push(tr('badNum',tr('num'))); r.bad.push('nN'); }
+    if (!(vd>0)){ r.msgs.push(tr('badNum',tr('den'))); r.bad.push('dN'); }
+    const nu=parseUnit(v.nU), du=parseUnit(v.dU);
+    if (nu.err){ r.msgs.push(unitErr(nu)); r.bad.push('nU'); }
+    if (du.err){ r.msgs.push(unitErr(du)); r.bad.push('dU'); }
+    const issues=(!nu.err && !du.err)? [...new Set([sideIssue(nu),sideIssue(du)].filter(Boolean))] : [];
+    if (issues.includes('compound')){ r.msgs.push(tr('compound')); broken=true; }
+    else if (!nu.err && !du.err){
+      issues.forEach(k=>r.msgs.push(tr(k)));
+      const dimsOk=sameDims(dimsOf(nu.map),dimsOf(du.map)), same=sameMap(nu.map,du.map);
+      if (!dimsOk) r.msgs.push(tr('dims',unitText(nu.map),unitText(du.map)));
+      else if (same) r.msgs.push(tr('same'));
+      else if (vn>0 && vd>0){
+        const q=(vn*siOf(nu.map))/(vd*siOf(du.map));
+        if (Math.abs(q-1)>1e-6){
+          const a=`${fmtIn(v.nN)} ${unitText(nu.map,vn!==1)}`, b=`${fmtIn(v.dN)} ${unitText(du.map,vd!==1)}`;
+          if (Math.abs(q-1)<0.02) r.msgs.push(tr('eqRounded',a,b));
+          else {
+            let s=tr('eqWrong',a,b);
+            const lg=Math.log10(q);
+            if (allKind(nu.map,'time') && allKind(du.map,'time')) s+=tr('tipTime');
+            else if (Math.abs(lg-Math.round(lg))<1e-6){
+              s+=tr('tipPow');
+              const e=nu.list.length===1 && ATOMS[nu.list[0].key].kind==='len' ? nu.list[0].exp : 1;
+              if (e===2) s+=tr('tipArea');
+              if (e===3) s+=tr('tipVol');
+            }
+            r.msgs.push(s);
+          }
+        }
+      }
+      if (dimsOk && !same && !reduces(cur,nu.map,du.map)){
+        if (reduces(cur,du.map,nu.map)){
+          const k=Object.keys({...nu.map,...du.map}).find(k=>cur[k]);
+          r.msgs.push(tr('flip',atomLabel(k),cur[k]>0?tr('den'):tr('num')));
+        } else r.msgs.push(tr('noCancel',unitText(cur)||'—'));
+      }
+      cur=applyF(cur,nu.map,du.map);
+    } else broken=true;
+    r.ok=!r.msgs.length;
+    if (!r.ok) allOk=false;
+    out.factors.push(r);
+  });
+  if (!broken){
+    out.unitsOk=sameMap(cur,p.to);
+    out.unitsMsg= out.unitsOk? tr('endOk',unitText(p.to)) : tr('endWrong',unitText(cur)||'—',unitText(p.to));
+  }
+  const rv=$('#resNum').value.trim();
+  if (!rv){ out.complete=false; out.resMsg=tr('resEmpty'); }
+  else {
+    const x=parseNum(rv);
+    if (isNaN(x)) out.resMsg=tr('resBad');
+    else {
+      const rel=Math.abs(x-p.ans)/Math.abs(p.ans);
+      const sf=sigFigs(rv), few=sf && sf.max<3, many=sf && sf.min>4;
+      if (rel<1e-9 && !isApprox(p.ans)) out.resOk=true;
+      else if (rel<=0.01){
+        if (few) out.resMsg=tr('resFewSig');
+        else if (many) out.resMsg=tr('resManySig');
+        else out.resOk=true;
+      }
+      else if (few && x!==0 && Math.abs(x-p.ans)<=10**(Math.floor(Math.log10(Math.abs(x)))-sf.max+1)) out.resMsg=tr('resFewSig');
+      else {
+        const q=x/p.ans, lg=Math.log10(Math.abs(q)), rl=Math.round(lg);
+        out.resMsg = (q>0 && rl!==0 && Math.abs(lg-rl)<0.005)? tr('resPow') : rel<0.05? tr('resClose') : tr('resWrong');
+      }
+    }
+  }
+  if (p.type==='si'){
+    const ru=$('#resUnitIn').value.trim();
+    if (!ru){ out.complete=false; out.resUnitMsg=tr('err_emptyUnit'); }
+    else {
+      const pu=parseUnit(ru);
+      if (pu.err) out.resUnitMsg=unitErr(pu);
+      else if (!sameMap(pu.map,p.to)) out.resUnitMsg=tr('resUnitWrong');
+      else out.resUnitOk=true;
+    }
+  } else out.resUnitOk=true;
+  out.success = out.complete && allOk && out.unitsOk && out.resOk && out.resUnitOk;
+  return out;
+}
+function renderFeedback(ev){
+  S.fbShown=true;
+  S.factors.forEach(f=>{ f.el.classList.remove('ok','bad'); f.el.querySelectorAll('input').forEach(i=>i.classList.remove('okb','badb')); });
+  const li=[];
+  ev.factors.forEach(r=>{
+    r.el.classList.add(r.ok?'ok':'bad');
+    const f=S.factors[r.idx-1]; r.bad.forEach(k=>f.get(k).classList.add('badb'));
+    li.push(`<li class="${r.ok?'ok':'bad'}"><b>${esc(tr('factor',r.idx))}:</b> ${esc(r.ok?tr('fOk'):r.msgs.join(' '))}</li>`);
+  });
+  if (ev.unitsMsg) li.push(`<li class="${ev.unitsOk?'ok':'bad'}"><b>${esc(tr('units'))}:</b> ${esc(ev.unitsMsg)}</li>`);
+  const resGood=ev.resOk && ev.resUnitOk;
+  const resTxt=resGood? tr('resOk') : [ev.resOk?'':ev.resMsg, ev.resUnitOk?'':ev.resUnitMsg].filter(Boolean).join(' ');
+  li.push(`<li class="${resGood?'ok':'bad'}"><b>${esc(tr('result'))}:</b> ${esc(resTxt)}</li>`);
+  $('#resNum').classList.toggle('okb',!!ev.resOk); $('#resNum').classList.toggle('badb',!ev.resOk);
+  if (S.p.type==='si'){ $('#resUnitIn').classList.toggle('okb',!!ev.resUnitOk); $('#resUnitIn').classList.toggle('badb',!ev.resUnitOk); }
+  if (!ev.complete) li.push(`<li class="note">${esc(tr('incompleteNote'))}</li>`);
+  $('#fb').innerHTML=li.join('');
+}
+function check(){
+  if (S.done) return;
+  const ev=evaluate();
+  renderFeedback(ev);
+  S.mark= ev.unitsOk===true? 'ok' : ev.unitsOk===false? 'bad' : null;
+  renderMark();
+  if (ev.success){
+    S.done=true; S.succ={att:S.attempts+1,hint:S.hint,sol:S.sol,used:ev.used};
+    record({ok:true,att:S.attempts+1});
+    renderSuccess(); lock(true);
+  } else if (ev.complete) S.attempts++;
+  updateAtt();
+}
+function lock(on){
+  $$('#chain input').forEach(i=>i.disabled=on);
+  $('#checkB').hidden=on; $('#skipB').hidden=on; $('#nextB').hidden=!on;
+  updateAtt();
+  renumber(); setPalette();
+  if (on) $('#nextB').focus();
+}
+function updateAtt(){
+  $('#att').textContent=`${tr('attempts',S.attempts)} · ${tr('attemptsNote')}`;
+  $('#hintB').hidden = S.done || S.hint || S.attempts<3;
+  $('#solB').hidden = S.done || S.sol || S.attempts<5;
+}
+function renderSuccess(){
+  const p=S.p, i=S.succ; if (!i) return;
+  let how=i.att===1? tr('first') : tr('inN',i.att);
+  if (i.sol) how+=', '+tr('withSol');
+  else if (i.hint) how+=', '+tr('withHint');
+  const minF=(solOf(p)||[]).length;
+  const tip=i.used>minF? `<div>${esc(tr('fewer',i.used,minF))}</div>` : '';
+  const many=parseNum(p.v)!==1;
+  $('#successBox').innerHTML=`<div class="success"><div class="big">${esc(tr('success'))} ${esc(fmtIn(p.v))} ${esc(unitText(p.from,many))} ${isApprox(p.ans)?'≈':'='} ${esc(fmtNum(p.ans))} ${esc(unitText(p.to,true))}</div><div>${esc(tr('solvedHow',how))}</div>${tip}</div>`;
+}
+function renderHint(){
+  const eqs=[...new Set((solOf(S.p)||[]).map(st=>eqText(st.E)))];
+  $('#hintBox').innerHTML=`<div class="panel"><h3>${esc(tr('hintT'))}</h3><div>${esc(tr('hintIntro'))}</div><ul>${eqs.map(e=>`<li>${esc(e)}</li>`).join('')}</ul></div>`;
+}
+function renderSolution(){
+  const p=S.p, sol=solOf(p)||[], net={...p.from};
+  sol.forEach(st=>{ for (const k in st.num) net[k]=(net[k]||0)+st.num[k]; for (const k in st.den) net[k]=(net[k]||0)-st.den[k]; });
+  const many=parseNum(p.v)!==1;
+  const q=`<span class="qty">${esc(fmtIn(p.v))} ${unitSpans(p.from,many,net)}</span>`;
+  const fr=sol.map(st=>`<span class="dot">·</span><span class="sfrac"><span>${esc(fmtEqNum(st.vn))} ${unitSpans(st.num,st.vn!==1,net)}</span><span class="bar"></span><span>${esc(fmtEqNum(st.vd))} ${unitSpans(st.den,st.vd!==1,net)}</span></span>`).join('');
+  $('#solBox').innerHTML=`<div class="panel sol"><h3>${esc(tr('solT'))}</h3><div class="chain">${q}${fr}<span class="eq">${isApprox(p.ans)?'≈':'='}</span><span class="res">${esc(fmtNum(p.ans))} ${esc(unitText(p.to,true))}</span></div><div class="att">${esc(tr('solNote'))}</div></div>`;
+}
+
+/* =========================================================
+   Resumen de la sesión
+   ========================================================= */
+function showSummary(){
+  if (S.p && !S.done && S.attempts>0){ record({skip:true,att:S.attempts}); S.done=true; S.needNew=true; }
+  const r=SESSION.recs;
+  const okk=q=>q.ok&&!q.sol;
+  const row=(name,x)=>[name,x.length,x.filter(q=>okk(q)&&q.att===1).length,x.filter(q=>okk(q)&&q.att>1&&!q.hint).length,
+    x.filter(q=>okk(q)&&q.hint).length,x.filter(q=>q.sol).length,x.filter(q=>q.skip&&!q.sol).length];
+  const rows=[1,2,3].map(l=>row(tr('lvl'+l),r.filter(q=>q.lvl===l)));
+  rows.push(row(tr('total'),r));
+  const ok=r.filter(q=>q.ok&&!q.sol).length;
+  const mins=Math.max(1,Math.round((Date.now()-SESSION.start)/60000));
+  const date=new Date(SESSION.start).toLocaleString(LANG==='es'?'es-ES':'en-GB',{dateStyle:'medium',timeStyle:'short'});
+  const head=['colLvl','colTried','colFirst','colMore','colHint','colSol','colSkip'].map(k=>`<th>${esc(tr(k))}</th>`).join('');
+  const body=rows.map((x,i)=>`<tr${i===3?' class="tot"':''}>${x.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('');
+  $('#modal').innerHTML=`<h2>${esc(tr('sumT'))}</h2>
+    <div class="meta">${esc(tr('date'))}: <b>${esc(date)}</b> · ${esc(tr('duration'))}: <b>${esc(tr('minutes',mins))}</b></div>
+    <div class="tablewrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>
+    <div class="pct">${esc(r.length? tr('pct',Math.round(100*ok/r.length)) : tr('none'))}</div>
+    <div class="actions"><button class="btn primary" id="keepB">${esc(tr('keepGoing'))}</button><button class="btn" id="newSesB">${esc(tr('newSession'))}</button></div>`;
+  $('#overlay').hidden=false;
+  $('#keepB').onclick=()=>{ $('#overlay').hidden=true; if (S.needNew){ S.needNew=false; newProblem(); } };
+  $('#newSesB').onclick=()=>{ SESSION={start:Date.now(),recs:[]}; saveSession(); updateStats(); $('#overlay').hidden=true; S.needNew=false; S.done=true; newProblem(); };
+}
+
+/* =========================================================
+   Idioma e inicio
+   ========================================================= */
+function applyI18n(){
+  document.documentElement.lang=LANG;
+  document.title=tr('title')+' · '+tr('brand');
+  $$('[data-i]').forEach(el=>el.textContent=tr(el.dataset.i));
+  $$('[data-ti]').forEach(el=>{ el.title=tr(el.dataset.ti); el.setAttribute('aria-label',tr(el.dataset.ti)); });
+  $$('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===LANG));
+  $('#how').innerHTML=tr('how').map(x=>`<li>${esc(x)}</li>`).join('');
+  $$('input.num').forEach(i=>i.placeholder=tr('numPh'));
+  $$('input.unit').forEach(i=>i.placeholder=tr('unitPh'));
+}
+function setLang(l){
+  LANG=l;
+  try{ localStorage.setItem('fyq-factores-lang',l); }catch(e){}
+  applyI18n(); renumber();
+  if (!S.p) return;
+  renderProblemText(); updateLive(); updateAtt();
+  if (S.fbShown) renderFeedback(evaluate());
+  if (S.succ) renderSuccess();
+  if (S.hint) renderHint();
+  if (S.sol) renderSolution();
+  if (!$('#overlay').hidden) showSummary();
+}
+function setLevel(l){
+  S.lvl=l;
+  $$('.lvl').forEach(b=>b.classList.toggle('on',+b.dataset.lvl===l));
+  newProblem();
+}
+
+$$('.lvl').forEach(b=>b.onclick=()=>setLevel(+b.dataset.lvl));
+$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+$('#addB').onclick=()=>{ const f=addFactor(); if (f) f.el.querySelector('input').focus(); };
+$('#checkB').onclick=check;
+$('#skipB').onclick=newProblem;
+$('#hintB').onclick=()=>{ S.hint=true; renderHint(); updateAtt(); };
+$('#solB').onclick=()=>{ if (S.done) return; S.sol=true; S.done=true; record({sol:true,att:S.attempts}); renderSolution(); lock(true); };
+$('#nextB').onclick=newProblem;
+$('#finishB').onclick=showSummary;
+wireInput($('#resNum'),null); wireInput($('#resUnitIn'),null);
+document.addEventListener('focusin',e=>{ if (e.target.matches('#chain input')){ S.focus=e.target; setPalette(); } });
+document.addEventListener('keydown',e=>{
+  if (e.key==='Enter' && e.target.matches('#chain input')){ e.preventDefault(); check(); }
+  if (e.key==='Escape' && !$('#overlay').hidden) $('#keepB').click();
+});
+$$('.kbd button').forEach(b=>{
+  b.addEventListener('mousedown',e=>e.preventDefault());
+  b.addEventListener('click',()=>{
+    const el=S.focus; if (!el || el.disabled) return;
+    const k=b.dataset.ins;
+    if (k==='pow') insertAt(el, el.value.slice(0,el.selectionStart??el.value.length).trim()? '·10^' : '10^');
+    else insertAt(el,{mu:MU,sq:'²',cu:'³'}[k]);
+  });
+});
+try{ const l=localStorage.getItem('fyq-factores-lang'); if (l==='en'||l==='es') LANG=l; }catch(e){}
+applyI18n(); updateStats(); setLevel(1);
+
+window.__fyq={sigFigs,PROBS,solve,solOf,parseNum,parseUnit,evaluate,S,addFactor,check,setLevel,newProblem,fmtNum,eqText,fmtEqNum,unitText,PBYID};
+</script>
+</body>
+</html>

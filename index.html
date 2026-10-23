@@ -366,6 +366,12 @@ const COURSES = {
   '2eso': {
     es: '2º ESO', en: 'Year 8',
     blocks: {
+      units:      { es:'Magnitudes y unidades', en:'Units and measurement', q:false, subs:[],
+                    simulations:[
+                      { name:{ es:'Factores de conversión', en:'Conversion factors' },
+                        meta:{ es:'100 problemas · 3 niveles', en:'100 problems · 3 levels' },
+                        file:'2eso/Units/factores-conversion.html' }
+                    ] },
       materia:    { es:'La materia',       en:'Matter',            q:false, subs:[], simulations:[] },
       fuerzas:    { es:'Fuerzas',          en:'Forces',            q:false, subs:[], simulations:[] },
       energia:    { es:'Energía',          en:'Energy',            q:false, subs:[], simulations:[] },
@@ -545,11 +551,11 @@ function renderContent() {
     card.appendChild(tag);
 
     const name = document.createElement('div');
-    name.className = 'sim-name'; name.textContent = sim.name; card.appendChild(name);
+    name.className = 'sim-name'; name.textContent = txt(sim.name); card.appendChild(name);
 
     if (sim.meta) {
       const m = document.createElement('div');
-      m.className = 'sim-meta'; m.textContent = sim.meta; card.appendChild(m);
+      m.className = 'sim-meta'; m.textContent = txt(sim.meta); card.appendChild(m);
     }
     const f = document.createElement('div'); f.className='sim-footer';
     const a = document.createElement('span'); a.className='sim-arrow'; a.textContent='▶';
@@ -558,6 +564,9 @@ function renderContent() {
   });
   el.appendChild(grid);
 }
+
+/* texto bilingüe: acepta "texto" o { es:'…', en:'…' } */
+function txt(v) { return (v && typeof v === 'object') ? (v[lang] || v.es) : v; }
 
 function addEyebrow(parent, text) {
   const e = document.createElement('div'); e.className='content-eyebrow'; e.textContent=text; parent.appendChild(e);
